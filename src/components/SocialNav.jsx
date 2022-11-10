@@ -3,7 +3,7 @@ import { FiMail, FaGithub, FaLinkedin, FaTwitch, FaTwitter } from 'react-icons/a
 
 const SocialNav = () => {
   return (
-    <nav className='w-fit absolute top-25 left-0 shadow-white rounded shadow p-2 flex flex-col gap-4'>
+    <nav className='w-fit absolute left-0 shadow-white rounded shadow p-2 flex flex-col gap-4'>
       <a href='https://twitch.tv/carandev'>
         <FaTwitch />
       </a>
