@@ -9,7 +9,7 @@ function App () {
   const testRequest = async () => {
     const response = await fetch('https://api.github.com/users/carandev/repos', {
       headers: {
-        authorization: `Bearer ${import.meta.env.VITE_VERCEL_GITHUB_API_KEY}`
+        authorization: `Bearer ${import.meta.env.VITE_GITHUB_API_KEY}`
       }
     })
 
