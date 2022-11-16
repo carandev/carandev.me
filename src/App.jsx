@@ -44,7 +44,7 @@ function App () {
         </section>
         <SocialNav />
       </header>
-      <main className='bg-slate-50 flex flex-wrap gap-4 p-4'>
+      <main className='bg-slate-50 flex flex-wrap gap-4 p-4 justify-center'>
         {
           repositories.map(repository => <ProjectCard key={repository.id} project={repository} />)
         }
