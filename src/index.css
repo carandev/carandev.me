@@ -50,10 +50,6 @@ main {
   gap: 4rem;
 }
 
-h2.title-projects {
-  text-decoration: underline;
-}
-
 .card {
   display: flex;
   flex-direction: column;
