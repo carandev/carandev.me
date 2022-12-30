@@ -44,7 +44,7 @@ function App () {
           <Heading as='h1' color='pinkPurple' size='2xl'>Carlos Gomez</Heading>
           <Divider color='cyan' />
           <Paragraph mt='sm' >
-            Full Stack Developer
+            Programador web
           </Paragraph>
         </Box>
         <img alt="Programador concentrado en el computador" className='header-img' src="/header.svg" />
