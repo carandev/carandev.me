@@ -33,6 +33,9 @@ function App () {
 
   return (
     <>
+      <div className='w-full bg-yellow-400 text-center text-red-500 uppercase font-bold'>
+        Portafolio en progreso
+      </div>
       <header className='h-screen bg-slate-700 text-slate-50 flex justify-center items-center'>
         <section className='max-w-xs'>
           <h1>Carlos Gomez</h1>
