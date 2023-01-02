@@ -6,6 +6,7 @@ import SocialBar from './components/SocialBar'
 import Header from './components/Header'
 import About from './components/About'
 import Projects from './components/Projects'
+import Footer from './components/Footer'
 
 function App () {
   const [repositories, setRepositories] = useState([])
@@ -43,6 +44,7 @@ function App () {
         <About />
         <Projects repositories={repositories} />
       </Box>
+      <Footer />
     </Box>
   )
 }

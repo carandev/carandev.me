@@ -8,7 +8,7 @@ const About = () => {
           <Divider color='purple' mb='md' />
           <Box display='flex'>
             <img alt="Persona presentando su perfil" className='header-img drac-mr-md' src="/about.svg" />
-            <Paragraph>
+            <Paragraph className='p-about'>
             Mi nombre es Carlos Gomez, soy estudiante de ingeniería en sistemas en la UTS
             y egresado del proyecto Misión TIC 2021. Soy programador web enfocado en lenguajes
             de programación como <Text color='purple'>JavaScript</Text>,
