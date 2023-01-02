@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import 'dracula-ui/styles/dracula-ui.css'
-import { Text, Box, Divider, Heading, Paragraph, Button, Anchor } from 'dracula-ui'
+import { Box } from 'dracula-ui'
 
 import SocialBar from './components/SocialBar'
 import Header from './components/Header'

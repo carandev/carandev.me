@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Divider, Heading, Paragraph, Button, Anchor } from 'dracula-ui'
+import { Box, Divider, Heading } from 'dracula-ui'
 
 import ProjectCard from './ProjectCard'
 
