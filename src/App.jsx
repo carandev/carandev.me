@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react'
 import 'dracula-ui/styles/dracula-ui.css'
 import { Box } from 'dracula-ui'
 
-import SocialBar from './components/SocialBar'
-import Header from './components/Header'
-import About from './components/About'
-import Projects from './components/Projects'
-import Footer from './components/Footer'
+import { SocialBar, Header, About, Projects, Footer } from './components'
 
 function App () {
   const [repositories, setRepositories] = useState([])
