@@ -10,7 +10,7 @@ const Header = () => {
           <Paragraph mt='sm' >
             Programador web
             <Button ml='sm' variant='outline'>
-              <Anchor href='/cv-carlos-gomez.pdf'>Hoja de vida</Anchor>
+              <Anchor color='black' hoverColor='black' href='/cv-carlos-gomez.pdf'>Hoja de vida</Anchor>
             </Button>
           </Paragraph>
         </Box>
