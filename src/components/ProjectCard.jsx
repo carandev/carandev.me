@@ -29,7 +29,7 @@ const ProjectCard = ({ repository, setReadme }) => {
       <Paragraph align='center'>{repository.description}</Paragraph>
       <Box className='buttons-container' display='flex'>
         <Button>
-            <Anchor color='black' href={repository.html_url} target="_blank">Repositorio</Anchor>
+            <Anchor color='black' hoverColor='black' href={repository.html_url} target="_blank">Repositorio</Anchor>
         </Button>
         <Button onClick={getReadme}>
             Ver más
@@ -37,7 +37,7 @@ const ProjectCard = ({ repository, setReadme }) => {
         {
           repository.homepage &&
           <Button variant='outline'>
-            <Anchor href={repository.homepage} target="_blank">Demo</Anchor>
+            <Anchor color='black' hoverColor='black' href={repository.homepage} target="_blank">Demo</Anchor>
           </Button>
         }
       </Box>
