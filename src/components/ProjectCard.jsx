@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { decode } from 'base-64'
+import utf8 from 'utf8'
 import { Box, Heading, Paragraph, Button, Anchor } from 'dracula-ui'
 
 const ProjectCard = ({ repository, setReadme }) => {
@@ -13,8 +14,9 @@ const ProjectCard = ({ repository, setReadme }) => {
       if (response.ok) {
         response.json().then(data => {
           const decoded = decode(data.content)
+          const utf8decoded = utf8.decode(decoded)
 
-          setReadme(decoded)
+          setReadme(utf8decoded)
         }
         )
       }

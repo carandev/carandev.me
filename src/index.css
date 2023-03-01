@@ -72,6 +72,59 @@ footer {
   padding: 2rem;
 }
 
+.preview-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem;
+
+  overflow-y: scroll;
+}
+
+.preview-close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--white);
+}
+
+.markdown ul {
+  list-style: none;
+}
+
+.preview-container .markdown h1 {
+  color: var(--orange);
+  font-size: var(--font-3xl);
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--orange);
+}
+
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: var(--white);
+}
+
+.markdown a {
+  color: var(--cyan);
+}
+
+.markdown img {
+  max-width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .nav {
     top: 0;

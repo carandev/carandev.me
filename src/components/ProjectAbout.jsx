@@ -1,11 +1,21 @@
+import { Box } from 'dracula-ui'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
-const ProjectAbout = ({ readme }) => {
+import CloseIcon from './CloseIcon'
+
+const ProjectAbout = ({ readme, setReadme }) => {
+  const closePreview = () => {
+    setReadme(null)
+  }
+
   return (
-    <ReactMarkdown>
+    <Box className='preview-container' color='black'>
+      <Box className='preview-close' onClick={closePreview}><CloseIcon/></Box>
+      <ReactMarkdown className='markdown'>
         {readme}
-    </ReactMarkdown>
+      </ReactMarkdown>
+    </Box>
   )
 }
 

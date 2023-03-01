@@ -16,7 +16,7 @@ const Projects = ({ repositories }) => {
               repositories.map(repository => <ProjectCard key={repository.id} repository={repository} setReadme={setReadme} />)
             }
           </Box>
-          {readme && <ProjectAbout readme={readme} />}
+          {readme && <ProjectAbout readme={readme} setReadme={setReadme} />}
     </Box>
   )
 }
