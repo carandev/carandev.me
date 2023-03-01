@@ -8,7 +8,7 @@ function App () {
   const [repositories, setRepositories] = useState([])
 
   const repoRequest = async () => {
-    const response = await fetch('https://api.github.com/users/carandev/repos', {
+    const response = await fetch('https://api.github.com/users/carandev/repos?sort=pushed', {
       headers: {
         authorization: `Bearer ${import.meta.env.VITE_GITHUB_API_KEY}`
       }
@@ -36,7 +36,7 @@ function App () {
     <Box className='h-screen' color='black' scrollbar="cyan">
       <SocialBar />
       <Header />
-      <Box as='main'>
+      <Box as='main' style={{ position: 'relative' }}>
         <About />
         <Projects repositories={repositories} />
       </Box>
