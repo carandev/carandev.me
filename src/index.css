@@ -16,6 +16,7 @@
   flex-direction: column;
   height: 250px;
   padding: .5rem;
+  z-index: 1;
 
   border-radius: 0 10px 10px 0;
 }
@@ -78,7 +79,6 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
   width: 100vw;
   height: 100vh;
   padding: 3rem;
