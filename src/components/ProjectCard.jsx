@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { decode } from 'base-64'
 import utf8 from 'utf8'
 import { Box, Heading, Paragraph, Button, Anchor } from 'dracula-ui'
 
 const ProjectCard = ({ repository, setReadme }) => {
+  const [foundReadme, setFoundReadme] = useState(true)
+
   const getReadme = () => {
     fetch(`${repository.url}/readme`, {
       headers: {
@@ -19,6 +21,11 @@ const ProjectCard = ({ repository, setReadme }) => {
           setReadme(utf8decoded)
         }
         )
+      } else {
+        setFoundReadme(false)
+        setTimeout(() => {
+          setFoundReadme(true)
+        }, 5000)
       }
     })
   }
@@ -34,6 +41,7 @@ const ProjectCard = ({ repository, setReadme }) => {
         <Button onClick={getReadme}>
             Ver más
         </Button>
+        {!foundReadme && <Paragraph align='center' color='red'>No hay un readme para este proyecto, está en construcción</Paragraph>}
         {
           repository.homepage &&
           <Button variant='outline'>

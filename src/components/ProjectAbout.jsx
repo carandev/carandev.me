@@ -11,7 +11,7 @@ const ProjectAbout = ({ readme, setReadme }) => {
 
   return (
     <Box className='preview-container' color='black'>
-      <Box className='preview-close' onClick={closePreview}><CloseIcon/></Box>
+      <button className='preview-close' onClick={closePreview}><CloseIcon/></button>
       <ReactMarkdown className='markdown'>
         {readme}
       </ReactMarkdown>
