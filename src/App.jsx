@@ -8,19 +8,13 @@ function App () {
   const [repositories, setRepositories] = useState([])
 
   const repoRequest = async () => {
-    const response = await fetch('https://api.github.com/users/carandev/repos?sort=pushed', {
-      headers: {
-        authorization: `Bearer ${import.meta.env.VITE_GITHUB_API_KEY}`
-      }
-    })
+    const response = await fetch('https://api.github.com/users/carandev/repos?sort=commits')
 
     const data = await response.json()
     const newRepositories = []
 
     data.forEach(repository => {
-      const description = repository.description || ''
-
-      if (description.includes('Proyecto')) {
+      if (repository.homepage) {
         newRepositories.push(repository)
       }
     })
