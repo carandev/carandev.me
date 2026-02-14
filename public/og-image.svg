@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1e2e"/>
+      <stop offset="100%" style="stop-color:#313244"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#89b4fa"/>
+      <stop offset="100%" style="stop-color:#f5c2e7"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Code brackets decoration -->
+  <text x="100" y="280" font-family="monospace" font-size="400" fill="#45475a" font-weight="bold">{</text>
+  <text x="900" y="420" font-family="monospace" font-size="400" fill="#45475a" font-weight="bold">}</text>
+  
+  <!-- Main content -->
+  <text x="600" y="260" font-family="monospace" font-size="72" fill="#cdd6f4" text-anchor="middle" font-weight="bold">Carlos Gómez</text>
+  <text x="600" y="340" font-family="monospace" font-size="36" fill="url(#accent)" text-anchor="middle">Full Stack Developer</text>
+  
+  <!-- Tech stack -->
+  <text x="600" y="420" font-family="monospace" font-size="24" fill="#a6adc8" text-anchor="middle">.NET | React | TypeScript | SQL Server</text>
+  
+  <!-- VS Code style bar -->
+  <rect x="0" y="0" width="1200" height="40" fill="#181825"/>
+  <circle cx="30" cy="20" r="6" fill="#f38ba8"/>
+  <circle cx="50" cy="20" r="6" fill="#fab387"/>
+  <circle cx="70" cy="20" r="6" fill="#a6e3a1"/>
+  <text x="600" y="26" font-family="monospace" font-size="14" fill="#cdd6f4" text-anchor="middle">carandev.me — Visual Studio Code</text>
+  
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="40" fill="#181825"/>
+  <text x="600" y="615" font-family="monospace" font-size="16" fill="#89b4fa" text-anchor="middle">carandev.me</text>
+</svg>
