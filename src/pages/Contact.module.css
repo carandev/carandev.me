@@ -1,0 +1,125 @@
+.container {
+  padding: 24px;
+  color: var(--foreground);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--blue);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.intro {
+  margin-bottom: 24px;
+}
+
+.introText {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.introText + .introText {
+  margin-top: 12px;
+}
+
+.contactList {
+  display: grid;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--sidebar);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.contactCard:hover {
+  border-color: var(--blue);
+  transform: translateX(4px);
+}
+
+.contactIcon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--activityBar);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.contactLabel {
+  font-size: 11px;
+  color: var(--yellow);
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contactValue {
+  font-size: 14px;
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.contactDesc {
+  font-size: 12px;
+  color: var(--foreground);
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.statusBox {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--sidebar);
+  border-radius: 8px;
+  border: 1px solid var(--green);
+  max-width: 500px;
+}
+
+.statusHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.statusTitle {
+  font-size: 13px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.statusText {
+  font-size: 13px;
+  color: var(--foreground);
+  opacity: 0.8;
+}

@@ -1,0 +1,146 @@
+.container {
+  padding: 24px;
+  color: var(--foreground);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--blue);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--blue);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--sidebar);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  flex: 1;
+}
+
+.cardDescription {
+  font-size: 13px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  min-height: 40px;
+  color: var(--foreground);
+  opacity: 0.85;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.language {
+  font-family: var(--font-mono);
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--yellow);
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.buttonPrimary {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.buttonSecondary {
+  background: var(--activityBar);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.loading {
+  font-family: var(--font-mono);
+}
+
+.error {
+  color: var(--red);
+}
+
+.errorHint {
+  font-size: 12px;
+  margin-top: 8px;
+  opacity: 0.7;
+}

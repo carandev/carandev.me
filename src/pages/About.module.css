@@ -1,0 +1,119 @@
+.container {
+  padding: 24px;
+  color: var(--foreground);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--blue);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.location {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.experience {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.experienceBadge {
+  color: var(--green);
+}
+
+.experienceDivider {
+  margin: 0 8px;
+  color: var(--border);
+}
+
+.bio {
+  margin-bottom: 24px;
+}
+
+.bioText {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.bioText + .bioText {
+  margin-top: 12px;
+}
+
+.cvButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--blue);
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.cvButton:hover {
+  opacity: 0.9;
+}
+
+.skills {
+  margin-top: 16px;
+}
+
+.skillsTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--purple);
+  display: flex;
+  align-items: center;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.skillCategory {
+  margin-bottom: 8px;
+}
+
+.skillCategoryTitle {
+  font-size: 11px;
+  color: var(--yellow);
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.skillList {
+  list-style: none;
+  font-size: 13px;
+}
+
+.skillItem {
+  margin-bottom: 4px;
+  color: var(--foreground);
+}

@@ -9,16 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "base-64": "1.0.0",
-    "dracula-ui": "^1.0.3",
+    "@types/node": "^25.2.3",
+    "lucide-react": "^0.564.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-markdown": "8.0.5",
-    "utf8": "3.0.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^3.0.0",
     "eslint": "8.30.0",
     "eslint-config-standard": "17.0.0",
@@ -27,6 +25,7 @@
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
+    "typescript": "^5.9.3",
     "vite": "^4.0.0"
   }
 }

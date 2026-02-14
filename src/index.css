@@ -1,174 +1,101 @@
+:root {
+  --background: #1e1e2e;
+  --foreground: #cdd6f4;
+  --sidebar: #181825;
+  --activityBar: #11111b;
+  --statusBar: #313244;
+  --tabActive: #1e1e2e;
+  --tabInactive: #313244;
+  --border: #45475a;
+  --hover: #45475a;
+  --selection: #585b70;
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  --orange: #fab387;
+  --purple: #cba6f7;
+  --cyan: #94e2d5;
+  
+  --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+[data-theme='light'] {
+  --background: #eff1f5;
+  --foreground: #4c4f69;
+  --sidebar: #e6e9ef;
+  --activityBar: #dce0e8;
+  --statusBar: #bcc0cc;
+  --tabActive: #ffffff;
+  --tabInactive: #e6e9ef;
+  --border: #ccd0da;
+  --hover: #dcdaec;
+  --selection: #bcc0cc;
+  --blue: #1e66f5;
+  --green: #40a02b;
+  --red: #d20f39;
+  --yellow: #df8e1d;
+  --orange: #fe640b;
+  --purple: #8839ef;
+  --cyan: #179299;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.h-screen {
-  min-height: 100vh;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.nav {
-  position: fixed;
-  top: calc(50% - 150px);
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  height: 250px;
-  padding: .5rem;
-  z-index: 1;
-
-  border-radius: 0 10px 10px 0;
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
 }
 
-header {
-  justify-content: space-evenly;
-  align-items: center;
+a {
+  color: var(--blue);
+  text-decoration: none;
 }
 
-h2 {
-  text-transform: uppercase;
+a:hover {
+  text-decoration: underline;
 }
 
-.header-img {
-  width: 320px;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.sct-about {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.container-projects {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 4rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.buttons-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.preview-container {
-  position: fixed;
-  top: 50px;
-  left: calc(50vw - 25vw);
-  min-width: 320px;
-  min-height: 320px;
-  max-width: 500px;
-  max-height: 500px;
-  padding: 3rem;
-
-  overflow-y: scroll;
-}
-
-.preview-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: .5rem;
+button {
+  font-family: inherit;
   cursor: pointer;
-  color: var(--white);
-  background-color: transparent;
-  border: none;
 }
 
-.markdown ul {
-  list-style: none;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.preview-container .markdown h1 {
-  color: var(--orange);
-  font-size: var(--font-3xl);
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6 {
-  color: var(--orange);
+::-webkit-scrollbar-thumb {
+  background: #585b70;
+  border-radius: 5px;
 }
 
-.markdown {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  color: var(--white);
+::-webkit-scrollbar-thumb:hover {
+  background: #6c6f85;
 }
 
-.markdown a {
-  color: var(--cyan);
+[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background: #bcc0cc;
 }
 
-.markdown img {
-  max-width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  .nav {
-    top: 0;
-    left: calc(50% - 115px);
-    flex-direction: row;
-    border-radius: 0 0 10px 10px;
-    width: 230px;
-    height: fit-content;
-  }
-
-  header {
-    flex-direction: column;
-  }
-
-  .sct-about {
-    width: 100vw;
-  }
-
-  .sct-about div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .sct-projects {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .p-about {
-    width: 300px;
-  }
-
-  h1,
-  h2 {
-    text-align: center;
-  }
+[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background: #9ca0b0;
 }
