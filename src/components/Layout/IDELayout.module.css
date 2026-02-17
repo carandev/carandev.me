@@ -23,3 +23,83 @@
   overflow: auto;
   background: var(--background);
 }
+
+/* Desktop only - hide on mobile */
+.desktopSidebar,
+.desktopExplorer {
+  display: flex;
+}
+
+/* Mobile styles */
+.mobileHeader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--activityBar);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 100;
+}
+
+.mobileHeaderTitle {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--foreground);
+}
+
+.mobileOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.mobileDrawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+  z-index: 1000;
+  overflow-y: auto;
+  padding-top: 44px;
+}
+
+@media (max-width: 768px) {
+  .desktopSidebar,
+  .desktopExplorer {
+    display: none;
+  }
+
+  .mobileHeader {
+    display: flex;
+  }
+
+  .mobileOverlay.open {
+    display: block;
+  }
+
+  .mobileDrawer.open {
+    display: block;
+  }
+
+  .main {
+    padding-top: 44px;
+  }
+
+  .mainContent {
+    padding-bottom: 24px;
+  }
+}

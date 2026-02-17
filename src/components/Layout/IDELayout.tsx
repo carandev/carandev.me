@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { Sidebar, Explorer, TabBar, StatusBar } from '../IDE'
 import { useTheme } from '../../hooks/useTheme'
 import { useSecrets } from '../../hooks/useSecrets'
+import { Menu, X } from 'lucide-react'
 import styles from './IDELayout.module.css'
 
 interface IDELayoutProps {
@@ -27,11 +28,13 @@ export function IDELayout({ children, onNavigate }: IDELayoutProps) {
   const [activeTab, setActiveTab] = useState('about')
   const [openTabs, setOpenTabs] = useState<SecretTab[]>([])
   const [secretFilesContent, setSecretFilesContent] = useState<Record<string, string>>({})
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleSectionChange = (section: string) => {
     setActiveSection(section)
     setActiveTab(section)
     onNavigate?.(section)
+    setMobileMenuOpen(false)
   }
 
   const handleOpenSecretFile = (fileId: string, content: string) => {
@@ -45,6 +48,7 @@ export function IDELayout({ children, onNavigate }: IDELayoutProps) {
     
     setActiveTab(fileId)
     setActiveSection(fileId)
+    setMobileMenuOpen(false)
   }
 
   const handleTabChange = (tabId: string) => {
@@ -67,6 +71,74 @@ export function IDELayout({ children, onNavigate }: IDELayoutProps) {
 
   return (
     <div className={styles.wrapper} style={{ background: colors.background }}>
+      {/* Mobile Header */}
+      <div className={styles.mobileHeader}>
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={{ background: 'transparent', border: 'none', color: colors.foreground, cursor: 'pointer' }}
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+        <span className={styles.mobileHeaderTitle}>carandev-portfolio</span>
+        <div style={{ width: 20 }} />
+      </div>
+
+      {/* Mobile Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className={styles.mobileOverlay}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Drawer */}
+      <div className={`${styles.mobileDrawer} ${mobileMenuOpen ? styles.open : ''}`} style={{ background: colors.sidebar }}>
+        <div style={{ padding: '10px 8px', borderBottom: `1px solid ${colors.border}` }}>
+          <span style={{ fontSize: '13px', color: colors.foreground, fontFamily: 'var(--font-mono)' }}>
+            EXPLORADOR
+          </span>
+        </div>
+        <div style={{ padding: '8px' }}>
+          <div style={{ 
+            padding: '4px 8px', 
+            fontSize: '13px', 
+            color: colors.foreground, 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px',
+            marginBottom: '8px'
+          }}>
+            <span style={{ color: colors.yellow }}>📁</span>
+            carandev-portfolio
+          </div>
+          
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => handleSectionChange(tab.id)}
+              style={{
+                width: '100%',
+                padding: '8px 8px 8px 24px',
+                fontSize: '13px',
+                background: activeSection === tab.id ? colors.selection : 'transparent',
+                border: 'none',
+                borderLeft: activeSection === tab.id ? `2px solid ${colors.blue}` : '2px solid transparent',
+                color: activeSection === tab.id ? colors.blue : colors.foreground,
+                cursor: 'pointer',
+                textAlign: 'left',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontFamily: 'var(--font-mono)',
+                marginBottom: '4px'
+              }}
+            >
+              📄 {tab.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {justUnlocked && (
         <div style={{
           position: 'fixed',
@@ -85,12 +157,16 @@ export function IDELayout({ children, onNavigate }: IDELayoutProps) {
         </div>
       )}
       <div className={styles.main}>
-        <Sidebar activeSection={activeSection} onSectionChange={handleSectionChange} />
-        <Explorer 
-          activeSection={activeSection} 
-          onSectionChange={handleSectionChange}
-          onOpenSecretFile={handleOpenSecretFile}
-        />
+        <div className={styles.desktopSidebar}>
+          <Sidebar activeSection={activeSection} onSectionChange={handleSectionChange} />
+        </div>
+        <div className={styles.desktopExplorer}>
+          <Explorer 
+            activeSection={activeSection} 
+            onSectionChange={handleSectionChange}
+            onOpenSecretFile={handleOpenSecretFile}
+          />
+        </div>
         
         <div className={styles.content}>
           <TabBar 
