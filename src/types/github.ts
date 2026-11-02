@@ -1,4 +1,4 @@
-/** Proyecto tal como lo devuelve /api/repos (ver api/repos.ts). */
+/** Project as returned by /api/repos (see src/lib/projects.ts). */
 export interface Project {
   name: string
   description: string | null

@@ -114,10 +114,12 @@ export async function fetchProjects (token: string): Promise<Project[]> {
   })
 
   const body = await response.json().catch(() => null) as
-    { data?: { viewer: { repositories: { nodes: GraphQLRepo[] } } } } | null
+    { data?: { viewer: { repositories: { nodes: GraphQLRepo[] } } }, errors?: unknown } | null
 
   if (!response.ok || !body?.data) {
-    throw new GitHubError(`GitHub GraphQL request failed (${response.status})`)
+    const details = body?.errors ? ` ${JSON.stringify(body.errors)}` : ''
+
+    throw new GitHubError(`GitHub GraphQL request failed (${response.status})${details}`)
   }
 
   return selectProjects(body.data.viewer.repositories.nodes)

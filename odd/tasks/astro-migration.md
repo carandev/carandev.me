@@ -17,7 +17,7 @@ Branch: `astro-migration` (from `redesign-trazos`) · Delivery: `ask-on-risk` ·
 |----|-------|-------|--------|--------|
 | T1 | S1, S2, S3, S5 | inline | done | see L4 |
 | T2 | S4 | inline | done | see L4 |
-| T3 | S1–S5 | independent verifier (Risk item 5) | pending | — |
+| T3 | S1–S5 | independent verifier (Risk item 5) | done | see L5 |
 
 ## Log
 
@@ -25,3 +25,4 @@ Branch: `astro-migration` (from `redesign-trazos`) · Delivery: `ask-on-risk` ·
 - L2: Astro 7.4.5, @astrojs/react 7.1.2, @astrojs/vercel 11.0.18 (Node 26 locally; Astro requires >=22.23.4). Astro 7 uses Vite 8; `import.meta.env` is always inlined, so the token goes through `astro:env/server` (secret, read at runtime).
 - L3: Routes inline; no writer trigger (single coupled unit). Risk item 5 (dependencies, deploy) → independent verifier after own checks.
 - L4: T1+T2 committed together (one Risk-item-5 unit: removing Vite also removes the dev API middleware). Checks: `astro check` → 0 errors, 0 warnings, 6 hints (pre-existing deprecated lucide brand icons); `astro build` → OK, `/index.html` prerendered, `/api/repos` bundled as a Vercel function, 172 KB client JS (React islands: Navbar, Projects, Contact); `astro dev` smoke test → `/api/repos` 200 with real GitHub data, desktop screenshot matches the previous design. Date-derived text carries `data-live-*` and is recomputed client-side (`src/scripts/live-dates.ts`). Note: current-job/studies status only changes when profile dates change, which triggers a rebuild.
+- L5: Independent verifier → S1–S5 PASS, no blockers. Evidence: markup diff baseline vs HEAD shows only the intended data-live-* wrappers; `refreshLiveDates` probed with fixed dates (2026-11-02 → "3 años", 2027-05-15 → "4 años"); sentinel token absent from all build output; endpoint returns 500 JSON without the token; exactly 3 islands (Navbar, Projects, Contact). Fixed advisories: stale `api/repos.ts` comments, GraphQL `errors` detail logged again. Open advisories: missing `/og-image.png` (pre-existing); Vercel functions run on Node 24 (local Node 26); current-job/studies status is build-time (correct while `end` is null or past).
