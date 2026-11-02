@@ -77,7 +77,7 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
       <div className={styles.links}>
         {project.demoUrl && (
           <a className={styles.link} href={project.demoUrl} rel='noopener noreferrer' target='_blank'>
-            Ver demo <ArrowUpRight aria-hidden='true' size={16} />
+            Ver más <ArrowUpRight aria-hidden='true' size={16} />
           </a>
         )}
         {project.repoUrl && (
