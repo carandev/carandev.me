@@ -1,0 +1,129 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 88px;
+  padding-bottom: 32px;
+}
+
+.heading { display: flex; flex-direction: column; gap: 8px; }
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.jobs, .education {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.jobs { flex: 2 1 480px; min-width: 0; }
+.education { flex: 1 1 280px; min-width: 0; }
+
+/* ---------- Trabajo ---------- */
+
+.job {
+  position: relative;
+  padding: 28px 28px 24px;
+  background: #fff;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--radius-card);
+  box-shadow: 2px 3px 0 rgba(44, 34, 30, 0.05), 0 6px 20px -4px rgba(62, 47, 40, 0.06);
+  transition: box-shadow 0.3s var(--ease-out), translate 0.3s var(--ease-out), opacity 0.7s var(--ease-out) var(--delay, 0s), transform 0.7s var(--ease-out) var(--delay, 0s);
+}
+.jobCurrent {
+  border-color: var(--ink);
+  box-shadow: 4px 5px 0 var(--ink);
+}
+.jobCurrent:hover { translate: -2px -2px; box-shadow: 7px 8px 0 var(--ink); }
+
+.jobHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.jobRole { font-size: 26px; }
+
+.period {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+
+.company {
+  margin: 6px 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.company a { color: var(--olive); }
+.location { font-weight: 500; color: var(--ink-light); }
+
+.highlights {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-light);
+}
+.highlights li::marker { color: var(--wine-500); }
+
+.currentTag {
+  position: absolute;
+  top: -14px;
+  right: 24px;
+  padding: 2px 12px;
+  font-family: var(--font-hand);
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--mint-bg);
+  color: var(--mint-ink);
+  border: 1.5px solid var(--mint-border);
+  border-radius: var(--radius-chip);
+  rotate: 3deg;
+  transition: rotate 0.35s var(--ease-spring);
+}
+.job:hover .currentTag { rotate: -4deg; }
+
+/* ---------- Estudios ---------- */
+
+.study {
+  position: relative;
+  padding: 24px 24px 22px;
+  background: var(--tone-soft);
+  color: var(--tone-ink);
+  border: 1.5px solid var(--tone-border);
+  border-radius: var(--radius-card-alt);
+  box-shadow: 2px 3px 0 color-mix(in srgb, var(--tone-ink) 12%, transparent);
+}
+
+.studyIcon { margin-bottom: 10px; }
+
+.studyDegree { font-size: 21px; line-height: 1.25; }
+
+.studyMeta {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.studyChip {
+  background: #fff;
+  color: var(--tone-ink);
+  border-color: var(--tone-border);
+}

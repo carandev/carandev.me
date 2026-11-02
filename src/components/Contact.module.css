@@ -1,0 +1,70 @@
+.box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 56px 28px;
+  text-align: center;
+  background: var(--lavender-soft);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-blob);
+  box-shadow: 5px 6px 0 var(--ink);
+}
+
+.eyebrow {
+  font-family: var(--font-hand);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--wine);
+  rotate: -2deg;
+}
+
+.title {
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.1;
+  max-width: 18ch;
+}
+
+.text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-light);
+  max-width: 46ch;
+}
+
+.actions, .socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.actions { margin-top: 6px; }
+
+.copy {
+  position: relative;
+  width: 48px;
+  padding: 0;
+}
+
+.copiedNote {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--olive);
+  white-space: nowrap;
+  opacity: 0;
+  translate: -50% 6px;
+  rotate: -6deg;
+  pointer-events: none;
+  transition: opacity 0.2s ease, translate 0.3s var(--ease-spring);
+}
+.copiedVisible { opacity: 1; translate: -50% 0; }
+
+@media (max-width: 480px) {
+  .box { padding: 44px 20px; }
+  .actions .btn:first-child { font-size: 15px; padding-inline: 18px; }
+}

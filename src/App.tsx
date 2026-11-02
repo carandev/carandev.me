@@ -1,38 +1,28 @@
-import { useState } from 'react'
-import { ThemeProvider } from './hooks/useTheme'
-import { IDELayout } from './components/Layout'
-import { About } from './pages/About'
-import { Projects } from './pages/Projects'
-import { Contact } from './pages/Contact'
+import { useReveal } from './hooks/useReveal'
+import { Navbar } from './components/Navbar'
+import { Hero } from './components/Hero'
+import { About } from './components/About'
+import { Experience } from './components/Experience'
+import { Projects } from './components/Projects'
+import { Contact } from './components/Contact'
+import { Footer } from './components/Footer'
 
-function AppContent() {
-  const [activeSection, setActiveSection] = useState('about')
-
-  const renderContent = () => {
-    switch (activeSection) {
-      case 'about':
-        return <About />
-      case 'projects':
-        return <Projects />
-      case 'contact':
-        return <Contact />
-      default:
-        return <About />
-    }
-  }
+function App () {
+  useReveal()
 
   return (
-    <IDELayout onNavigate={setActiveSection}>
-      {renderContent()}
-    </IDELayout>
-  )
-}
-
-function App() {
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <>
+      <a className='visually-hidden' href='#inicio'>Saltar al contenido</a>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   )
 }
 
