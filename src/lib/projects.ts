@@ -65,14 +65,13 @@ const QUERY = `
           usesCustomOpenGraphImage
           primaryLanguage { name color }
           repositoryTopics(first: 20) { nodes { topic { name } } }
-          ${IMAGE_FIELDS}
         }
       }
     }
   }
 `
 
-interface GraphQLRepo extends ImageFields {
+interface GraphQLRepo {
   name: string
   description: string | null
   url: string
@@ -96,18 +95,6 @@ function normalizeUrl (url: string | null): string | null {
   return /^https?:\/\//.test(trimmed) ? trimmed : `https://${trimmed}`
 }
 
-/**
- * 1. An image file committed in the repo (served by our endpoint, works for private repos).
- * 2. The repo's GitHub "social preview" (public repos only; private ones are not publicly reachable).
- */
-function imageUrlFor (repo: GraphQLRepo): string | null {
-  const image = findImage(repo)
-
-  if (image) return `/api/repos/${encodeURIComponent(repo.name)}/image?v=${image.oid}`
-
-  return repo.isPrivate ? null : repo.openGraphImageUrl
-}
-
 function toProject (repo: GraphQLRepo, featured: boolean): Project {
   const topics = repo.repositoryTopics.nodes.map(n => n.topic.name)
 
@@ -117,7 +104,9 @@ function toProject (repo: GraphQLRepo, featured: boolean): Project {
     // Never link the code of a private repository
     repoUrl: repo.isPrivate ? null : repo.url,
     demoUrl: normalizeUrl(repo.homepageUrl),
-    imageUrl: imageUrlFor(repo),
+    // Default image: the GitHub "social preview" (public repos only; private ones are not
+    // publicly reachable). withRepoImages() may replace it with an image file from the repo.
+    imageUrl: repo.isPrivate ? null : repo.openGraphImageUrl,
     language: repo.primaryLanguage,
     topics: topics.filter(t => !HIDDEN_TOPICS.has(t)),
     stars: repo.stargazerCount,
@@ -168,7 +157,56 @@ export async function fetchProjects (token: string): Promise<Project[]> {
     throw new GitHubError(`GitHub GraphQL request failed (${response.status})${details}`)
   }
 
-  return selectProjects(body.data.viewer.repositories.nodes)
+  return withRepoImages(token, selectProjects(body.data.viewer.repositories.nodes))
+}
+
+/**
+ * Looks up `.github/portfolio.*` only in the selected projects. Doing it inside the
+ * list query (for every repository) made it 2–4x slower and hit GitHub's timeout.
+ * A failure here never breaks the list: projects keep their default image.
+ */
+async function withRepoImages (token: string, projects: Project[]): Promise<Project[]> {
+  if (projects.length === 0) return projects
+
+  const variables = Object.fromEntries(projects.map((p, i) => [`n${i}`, p.name]))
+  const query = `
+    query (${projects.map((_, i) => `$n${i}: String!`).join(', ')}) {
+      ${projects.map((_, i) => `r${i}: repository(owner: "${GITHUB_OWNER}", name: $n${i}) { ${IMAGE_FIELDS} }`).join('\n      ')}
+    }
+  `
+
+  try {
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'User-Agent': 'carandev.me'
+      },
+      body: JSON.stringify({ query, variables }),
+      signal: AbortSignal.timeout(6000)
+    })
+    const body = await response.json().catch(() => null) as
+      { data?: Record<string, ImageFields | null>, errors?: unknown } | null
+
+    if (!response.ok || !body?.data) {
+      throw new GitHubError(`GitHub image lookup failed (${response.status})${body?.errors ? ` ${JSON.stringify(body.errors)}` : ''}`)
+    }
+
+    const data = body.data
+
+    return projects.map((project, i) => {
+      const image = findImage(data[`r${i}`] ?? {})
+
+      return image
+        ? { ...project, imageUrl: `/api/repos/${encodeURIComponent(project.name)}/image?v=${image.oid}` }
+        : project
+    })
+  } catch (error) {
+    console.error(error)
+
+    return projects
+  }
 }
 
 const IMAGE_QUERY = `
