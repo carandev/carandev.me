@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { Navbar } from '../components/Navbar'
+import { Hero } from '../components/Hero'
+import { About } from '../components/About'
+import { Experience } from '../components/Experience'
+import { Projects } from '../components/Projects'
+import { Contact } from '../components/Contact'
+import { Footer } from '../components/Footer'
+---
+
+<Layout>
+  <a class='visually-hidden' href='#inicio'>Saltar al contenido</a>
+  <!-- Interactive islands hydrate; the rest is static HTML with no client JS. -->
+  <Navbar client:load />
+  <main>
+    <Hero />
+    <About />
+    <Experience />
+    <Projects client:load />
+    <Contact client:visible />
+  </main>
+  <Footer />
+</Layout>

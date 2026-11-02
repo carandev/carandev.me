@@ -26,3 +26,6 @@ dist-ssr
 pnpm-lock.yaml
 .vercel
 .env*.local
+
+# Astro
+.astro

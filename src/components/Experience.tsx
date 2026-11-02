@@ -35,7 +35,7 @@ export function Experience () {
               >
                 <div className={styles.jobHead}>
                   <h3 className={styles.jobRole}>{job.role}</h3>
-                  <span className={styles.period}>{formatPeriod(job.start, job.end)}</span>
+                  <span className={styles.period} data-end={job.end ?? undefined} data-live-period={job.start}>{formatPeriod(job.start, job.end)}</span>
                 </div>
                 <p className={styles.company}>
                   {job.url

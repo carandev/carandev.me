@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 import { ArrowRight, MapPin } from 'lucide-react'
 
 import { profile } from '../data/profile'
-import { currentJob, formatDuration, totalExperienceMonths } from '../lib/dates'
+import { currentJob, firstJobStart, formatDuration, totalExperienceMonths } from '../lib/dates'
 import { Arrow } from './Sketch'
 import styles from './Hero.module.css'
 
@@ -18,7 +18,7 @@ export function Hero () {
         <p className={styles.hello} data-reveal='' style={delay(0)}>¡hola! soy</p>
         <h1 className={styles.name} data-reveal='' style={delay(0.08)}>{profile.name}</h1>
         <p className={styles.lead} data-reveal='' style={delay(0.16)}>
-          {profile.role} con <strong>{experience}</strong> de experiencia. Construyo aplicaciones web con{' '}
+          {profile.role} con <strong data-live-duration={firstJobStart(profile.jobs)}>{experience}</strong> de experiencia. Construyo aplicaciones web con{' '}
           <span className='highlight highlight--lavender'>.NET y Blazor</span>, y también con{' '}
           <span className='highlight highlight--cream'>React y TypeScript</span>.
         </p>

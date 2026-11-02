@@ -1,0 +1,71 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Carlos Gómez | Full Stack Developer',
+  description = 'Full Stack Developer | .NET | React | TypeScript | Portafolio'
+} = Astro.props
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
+const ogImage = new URL('/og-image.png', Astro.site)
+---
+
+<!doctype html>
+<html lang='es'>
+  <head>
+    <meta charset='UTF-8' />
+    <link href='https://avatars.githubusercontent.com/u/72842040' rel='icon' type='image/svg+xml' />
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+
+    <link href='https://fonts.googleapis.com' rel='preconnect' />
+    <link crossorigin href='https://fonts.gstatic.com' rel='preconnect' />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Marcellus&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap'
+      rel='stylesheet'
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta content={title} name='title' />
+    <meta content={description} name='description' />
+    <meta content='Carlos Gómez' name='author' />
+    <meta content='#FAF7F2' name='theme-color' />
+    <link href={canonicalUrl} rel='canonical' />
+
+    <!-- Open Graph / Facebook -->
+    <meta content='website' property='og:type' />
+    <meta content={canonicalUrl} property='og:url' />
+    <meta content={title} property='og:title' />
+    <meta content={description} property='og:description' />
+    <meta content={ogImage} property='og:image' />
+    <meta content='carandev.me' property='og:site_name' />
+    <meta content='es_CO' property='og:locale' />
+
+    <!-- Twitter -->
+    <meta content='summary_large_image' property='twitter:card' />
+    <meta content={canonicalUrl} property='twitter:url' />
+    <meta content={title} property='twitter:title' />
+    <meta content={description} property='twitter:description' />
+    <meta content={ogImage} property='twitter:image' />
+
+    <!-- LinkedIn -->
+    <meta content='carandev' property='linkedin:owner' />
+  </head>
+
+  <body>
+    <slot />
+
+    <script>
+      import { observeReveal } from '../scripts/reveal'
+      import { refreshLiveDates } from '../scripts/live-dates'
+
+      refreshLiveDates()
+      observeReveal()
+    </script>
+  </body>
+</html>

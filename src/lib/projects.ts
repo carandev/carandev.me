@@ -1,14 +1,13 @@
 /**
- * GET /api/repos
+ * Projects shown in the portfolio. They are chosen on GitHub with repository
+ * topics, so no redeploy is needed:
+ *   - `portfolio` → shown in the portfolio
+ *   - `featured`  → shown as a featured project (implies `portfolio`)
  *
- * Devuelve los proyectos a mostrar en el portafolio. Se eligen desde GitHub
- * con topics del repositorio (sin redeploy):
- *   - `portfolio` → aparece en el portafolio
- *   - `featured`  → aparece como proyecto destacado (implica `portfolio`)
- *
- * Si ningún repo tiene esos topics, se usan como respaldo los repos que tienen
- * una URL de demo (homepage), igual que la versión anterior.
+ * If no repository has those topics, public repositories with a homepage
+ * (demo URL) are used as a fallback.
  */
+import type { Project } from '../types/github'
 
 const SHOW_TOPIC = 'portfolio'
 const FEATURED_TOPIC = 'featured'
@@ -54,19 +53,6 @@ interface GraphQLRepo {
   repositoryTopics: { nodes: { topic: { name: string } }[] }
 }
 
-export interface Project {
-  name: string
-  description: string | null
-  repoUrl: string | null
-  demoUrl: string | null
-  imageUrl: string | null
-  language: { name: string, color: string | null } | null
-  topics: string[]
-  stars: number
-  pushedAt: string
-  featured: boolean
-}
-
 function normalizeUrl (url: string | null): string | null {
   if (!url) return null
   const trimmed = url.trim()
@@ -81,10 +67,10 @@ function toProject (repo: GraphQLRepo, featured: boolean): Project {
   return {
     name: repo.name,
     description: repo.description,
-    // Nunca enlazamos el código de un repo privado
+    // Never link the code of a private repository
     repoUrl: repo.isPrivate ? null : repo.url,
     demoUrl: normalizeUrl(repo.homepageUrl),
-    // La imagen de un repo privado no es pública; la de uno público es su "social preview"
+    // A private repo image is not public; a public repo uses its "social preview"
     imageUrl: repo.isPrivate ? null : repo.openGraphImageUrl,
     language: repo.primaryLanguage,
     topics: topics.filter(t => !HIDDEN_TOPICS.has(t)),
@@ -103,29 +89,20 @@ export function selectProjects (repos: GraphQLRepo[]): Project[] {
   if (chosen.length > 0) {
     const projects = chosen.map(r => toProject(r, hasTopic(r, FEATURED_TOPIC)))
 
-    // Destacados primero; dentro de cada grupo, por última actividad (ya vienen ordenados)
+    // Featured first; each group keeps the latest-activity order from the query
     return [...projects.filter(p => p.featured), ...projects.filter(p => !p.featured)]
   }
 
-  // Respaldo: repos públicos con demo; los 3 más recientes como destacados
+  // Fallback: public repos with a demo; the 3 most recent become featured
   return repos
     .filter(r => !r.isPrivate && !r.isFork && !r.isArchived && normalizeUrl(r.homepageUrl))
     .map((r, i) => toProject(r, i < 3))
 }
 
-interface Res {
-  status: (code: number) => Res
-  setHeader: (name: string, value: string) => void
-  json: (body: unknown) => void
-}
+export class GitHubError extends Error {}
 
-export default async function handler (_req: unknown, res: Res) {
-  const token = process.env.GITHUB_API_KEY
-
-  if (!token) {
-    return res.status(500).json({ error: 'Falta la variable de entorno GITHUB_API_KEY' })
-  }
-
+/** Fetches the owner's repositories with the given token and selects the ones to show. */
+export async function fetchProjects (token: string): Promise<Project[]> {
   const response = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
@@ -137,13 +114,11 @@ export default async function handler (_req: unknown, res: Res) {
   })
 
   const body = await response.json().catch(() => null) as
-    { data?: { viewer: { repositories: { nodes: GraphQLRepo[] } } }, errors?: unknown } | null
+    { data?: { viewer: { repositories: { nodes: GraphQLRepo[] } } } } | null
 
   if (!response.ok || !body?.data) {
-    return res.status(502).json({ error: 'No se pudieron obtener los repositorios' })
+    throw new GitHubError(`GitHub GraphQL request failed (${response.status})`)
   }
 
-  // CDN de Vercel: 1 h fresco, hasta 1 día sirviendo la versión anterior mientras revalida
-  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
-  res.json(selectProjects(body.data.viewer.repositories.nodes))
+  return selectProjects(body.data.viewer.repositories.nodes)
 }

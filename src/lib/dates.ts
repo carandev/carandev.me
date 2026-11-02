@@ -46,12 +46,16 @@ export function isOngoing (end: string | null, now: Date = new Date()): boolean 
   return end === null || parseYearMonth(end) > now
 }
 
-/** Experiencia profesional total: desde el primer trabajo hasta hoy. */
-export function totalExperienceMonths (jobs: Job[], now: Date = new Date()): number {
-  if (jobs.length === 0) return 0
-  const first = jobs.map(j => parseYearMonth(j.start)).sort((a, b) => a.getTime() - b.getTime())[0]
+/** Start of the first job ('YYYY-MM'), i.e. where professional experience begins. */
+export function firstJobStart (jobs: Job[]): string | undefined {
+  return [...jobs].sort((a, b) => parseYearMonth(a.start).getTime() - parseYearMonth(b.start).getTime())[0]?.start
+}
 
-  return monthsBetween(first, now)
+/** Total professional experience: from the first job until now. */
+export function totalExperienceMonths (jobs: Job[], now: Date = new Date()): number {
+  const start = firstJobStart(jobs)
+
+  return start ? monthsBetween(parseYearMonth(start), now) : 0
 }
 
 export function currentJob (jobs: Job[], now: Date = new Date()): Job | undefined {
