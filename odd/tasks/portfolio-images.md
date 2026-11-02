@@ -14,7 +14,7 @@ Branch: `astro-migration` · Delivery: `ask-on-risk` · Test runner: none (check
 | ID | Specs | Route | Status | Commit |
 |----|-------|-------|--------|--------|
 | T1 | S1, S2, S3 | inline | done | see L4 |
-| T2 | S1–S3 | independent verifier (Risk item 2) | pending | — |
+| T2 | S1–S3 | independent verifier (Risk item 2) | done | see L5 |
 
 ## Log
 
@@ -22,3 +22,4 @@ Branch: `astro-migration` · Delivery: `ask-on-risk` · Test runner: none (check
 - L2: Verified in GitHub docs: REST `GET /repos/{owner}/{repo}/contents/{path}` with `application/vnd.github.raw+json` returns raw bytes (files up to 100 MB); GraphQL `Repository.object(expression: "HEAD:<path>")` returns a `Blob` with `oid` and `byteSize`.
 - L3: Risk item 2 (a server credential is used to publish content from private repos) → independent verifier.
 - L4: T1 done. `astro check` → 0 errors, 0 warnings; `astro build` → Complete. Dev smoke test with real GitHub data: the extended GraphQL query succeeds; no repo has the file yet, so `imageUrl` keeps Social preview (public) / null (private); `/api/repos/lazytsql/image` → 404, `/api/repos/FlatBrutal/image` → 404, invalid name → 400, unknown repo → 404. The positive path (file present) needs mocked GitHub responses (T2). Private repos only expose the image when tagged `portfolio`/`featured`; the blob is fetched by the oid GraphQL reported; SVG excluded; 5 MB cap.
+- L5: Independent verifier → S1–S3 and assumption PASS, no blockers. Evidence: 22/22 mocked probes of `selectProjects`/`fetchPortfolioImage` (order png>jpg>jpeg>webp, 5 MB cap, private untagged → no blob request); real handler probed: invalid names → 400 with zero network calls, missing token → 500, 404/502 paths, `nosniff`, immutable only when `v` = oid; no token in static output; S3 output deepEqual to baseline. Open advisory (needs user decision): uncached URLs (any `?v=` or query string, also on the pre-existing `/api/repos`) bypass the CDN and spend GitHub API quota; mitigation would be a Vercel firewall rate-limit rule. Other advisories accepted by design: year-long immutable cache of already-published images; public repos served without tag; `GITHUB_OWNER` hard-coded to `carandev`.
