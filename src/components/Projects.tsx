@@ -135,7 +135,8 @@ export function Projects () {
 
   return (
     <section className={`container ${styles.section}`} id='proyectos'>
-      <div className={styles.header} data-reveal=''>
+      {/* reveal.ts may mark this element before hydration */}
+      <div suppressHydrationWarning className={styles.header} data-reveal=''>
         <div className={styles.heading}>
           <p className='eyebrow'>03 · proyectos</p>
           <h2 className='section-title'>Cosas que he construido</h2>

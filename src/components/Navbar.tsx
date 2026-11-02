@@ -40,7 +40,9 @@ export function Navbar () {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.inner}`}>
+        {/* reveal.ts may mark this element before hydration */}
         <a
+          suppressHydrationWarning
           className={styles.logo}
           data-reveal=''
           href='#inicio'

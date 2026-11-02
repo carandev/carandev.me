@@ -23,7 +23,8 @@ export function Contact () {
 
   return (
     <section className='container' id='contacto'>
-      <div className={styles.box} data-reveal=''>
+      {/* reveal.ts may mark this element before hydration */}
+      <div suppressHydrationWarning className={styles.box} data-reveal=''>
         <p className={styles.eyebrow}>04 · ¿hablamos?</p>
         <h2 className={styles.title}>¿Tienes un proyecto o una vacante en mente?</h2>
         <p className={styles.text}>
