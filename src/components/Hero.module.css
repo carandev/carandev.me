@@ -25,7 +25,7 @@
 }
 
 .name {
-  font-size: clamp(48px, 8vw, 88px);
+  font-size: clamp(44px, 7vw, 72px);
   line-height: 1;
   letter-spacing: 0.01em;
 }
