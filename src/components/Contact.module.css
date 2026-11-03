@@ -9,7 +9,7 @@
   background: var(--lavender-soft);
   border: 1.5px solid var(--ink);
   border-radius: var(--radius-blob);
-  box-shadow: 5px 6px 0 var(--ink);
+  box-shadow: 5px 6px 0 var(--shadow-ink);
 }
 
 .eyebrow {

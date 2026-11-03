@@ -35,6 +35,26 @@ const ogImage = new URL('/og-image.png', Astro.site)
     <meta content={description} name='description' />
     <meta content='Carlos Gómez' name='author' />
     <meta content='#FAF7F2' name='theme-color' />
+    <script is:inline>
+      // Apply the theme before first paint to avoid a flash of the wrong colors.
+      (() => {
+        const root = document.documentElement
+        const media = window.matchMedia('(prefers-color-scheme: dark)')
+        const meta = document.querySelector('meta[name="theme-color"]')
+        let stored = null
+        try { stored = localStorage.getItem('theme') } catch {}
+        const apply = (theme) => {
+          root.dataset.theme = theme
+          meta?.setAttribute('content', theme === 'dark' ? '#1A1513' : '#FAF7F2')
+        }
+        apply(stored === 'dark' || stored === 'light' ? stored : (media.matches ? 'dark' : 'light'))
+        media.addEventListener('change', (e) => {
+          let saved = null
+          try { saved = localStorage.getItem('theme') } catch {}
+          if (!saved) apply(e.matches ? 'dark' : 'light')
+        })
+      })()
+    </script>
     <link href={canonicalUrl} rel='canonical' />
 
     <!-- Open Graph / Facebook -->

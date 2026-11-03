@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, Moon, Sun, X } from 'lucide-react'
 
 import { profile } from '../data/profile'
 import { useScrollSpy } from '../hooks/useScrollSpy'
+import { currentTheme, setTheme } from '../lib/theme'
 import { Circle } from './Sketch'
 import styles from './Navbar.module.css'
 
@@ -50,6 +51,18 @@ export function Navbar () {
           carandev
           <Circle className={styles.logoCircle} />
         </a>
+
+        <button
+          aria-label='Cambiar tema claro u oscuro'
+          className={styles.themeButton}
+          title='Cambiar tema'
+          type='button'
+          onClick={() => setTheme(currentTheme() === 'dark' ? 'light' : 'dark')}
+        >
+          {/* CSS shows the icon for the active theme, so server HTML never mismatches */}
+          <Moon aria-hidden='true' className={styles.iconMoon} size={20} />
+          <Sun aria-hidden='true' className={styles.iconSun} size={20} />
+        </button>
 
         <button
           aria-controls='nav-links'

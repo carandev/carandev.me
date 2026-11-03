@@ -31,7 +31,7 @@
 .job {
   position: relative;
   padding: 28px 28px 24px;
-  background: #fff;
+  background: var(--surface);
   border: 1.5px solid var(--paper-border);
   border-radius: var(--radius-card);
   box-shadow: 2px 3px 0 rgba(44, 34, 30, 0.05), 0 6px 20px -4px rgba(62, 47, 40, 0.06);
@@ -39,9 +39,9 @@
 }
 .jobCurrent {
   border-color: var(--ink);
-  box-shadow: 4px 5px 0 var(--ink);
+  box-shadow: 4px 5px 0 var(--shadow-ink);
 }
-.jobCurrent:hover { translate: -2px -2px; box-shadow: 7px 8px 0 var(--ink); }
+.jobCurrent:hover { translate: -2px -2px; box-shadow: 7px 8px 0 var(--shadow-ink); }
 
 .jobHead {
   display: flex;
@@ -123,7 +123,7 @@
 }
 
 .studyChip {
-  background: #fff;
+  background: var(--surface);
   color: var(--tone-ink);
   border-color: var(--tone-border);
 }
