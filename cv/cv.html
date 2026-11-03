@@ -1,0 +1,134 @@
+<!doctype html>
+<!--
+  Source of public/cv-carlos-gomez.pdf. Regenerate with:
+  chromium --headless=new --no-pdf-header-footer --print-to-pdf=public/cv-carlos-gomez.pdf cv/cv.html
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Andrés Gómez Silva — CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: letter; margin: 0; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0.6in 0.7in;
+      font: 10.5pt/1.5 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: #2C221E;
+      background: #fff;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1 { font: 26pt/1.1 'Marcellus', Georgia, serif; margin: 0; }
+    .role { margin: 4px 0 8px; font-weight: 600; color: #386F54; }
+    .contact { color: #5A4C46; font-size: 9.5pt; }
+    .contact { display: flex; flex-wrap: wrap; gap: 2px 16px; }
+    h2 {
+      margin: 22px 0 8px;
+      padding-bottom: 4px;
+      font: 13pt 'Marcellus', Georgia, serif;
+      color: #9B1D43;
+      border-bottom: 1.5px solid #E5DACB;
+    }
+    p { margin: 0; }
+    .entry + .entry { margin-top: 10px; }
+    .head { display: flex; justify-content: space-between; gap: 12px; }
+    .title { font-weight: 700; }
+    .meta { color: #5A4C46; font-size: 9.5pt; white-space: nowrap; }
+    .sub { color: #5A4C46; }
+    ul { margin: 4px 0 0; padding-left: 16px; }
+    li + li { margin-top: 2px; }
+    .skills { display: grid; grid-template-columns: 110px 1fr; gap: 3px 12px; }
+    .skills dt { font-weight: 700; }
+    .skills dd { margin: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Carlos Andrés Gómez Silva</h1>
+    <p class="role">Desarrollador Full Stack · .NET · Blazor</p>
+    <p class="contact">
+      <span>Piedecuesta, Santander, Colombia</span>
+      <span><a href="mailto:contacto@carandev.me">contacto@carandev.me</a></span>
+      <span><a href="https://carandev.me">carandev.me</a></span>
+      <span><a href="https://github.com/carandev">github.com/carandev</a></span>
+      <span><a href="https://linkedin.com/in/carandev">linkedin.com/in/carandev</a></span>
+    </p>
+  </header>
+
+  <section>
+    <h2>Perfil</h2>
+    <p>
+      Desarrollador Full Stack con experiencia desde 2023 construyendo aplicaciones web y de escritorio,
+      principalmente con Blazor y .NET, tanto del lado del cliente como del servidor. Me muevo cómodo
+      consumiendo servicios web, diseñando arquitecturas y entregando soluciones de punta a punta,
+      con código limpio y mantenible.
+    </p>
+  </section>
+
+  <section>
+    <h2>Experiencia</h2>
+    <div class="entry">
+      <div class="head">
+        <p><span class="title">Desarrollador Full Stack</span> · Schein SAS</p>
+        <p class="meta">may 2023 — actualidad · Bucaramanga</p>
+      </div>
+      <ul>
+        <li>Aplicaciones web y de escritorio con .NET, Blazor y WPF.</li>
+        <li>Integración y consumo de servicios web.</li>
+        <li>Código limpio y arquitecturas mantenibles y escalables.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Proyectos</h2>
+    <div class="entry">
+      <div class="head">
+        <p class="title">lazytsql</p>
+        <p class="meta"><a href="https://carandev.github.io/lazytsql/">carandev.github.io/lazytsql</a></p>
+      </div>
+      <p class="sub">Cliente de terminal para SQL Server al estilo lazygit: explorador de esquema, editor con autocompletado, grilla de resultados y exportación a CSV y .bacpac. C# / .NET.</p>
+    </div>
+    <div class="entry">
+      <div class="head">
+        <p class="title">FlatBrutal</p>
+        <p class="meta"><a href="https://flatbrutal.carandev.me">flatbrutal.carandev.me</a></p>
+      </div>
+      <p class="sub">Librería de componentes de interfaz para Blazor (.NET 10) con un estilo limpio y moderno.</p>
+    </div>
+    <div class="entry">
+      <div class="head">
+        <p class="title">AccountingManager</p>
+        <p class="meta"><a href="https://accounting-manager.carandev.me">accounting-manager.carandev.me</a></p>
+      </div>
+      <p class="sub">Sistema para gestionar la contabilidad personal, construido en .NET.</p>
+    </div>
+    <div class="entry">
+      <div class="head">
+        <p class="title">SQL Server Bacpac Manager</p>
+        <p class="meta">JetBrains Marketplace</p>
+      </div>
+      <p class="sub">Plugin publicado para importar y exportar bases de datos de SQL Server con archivos .bacpac. Kotlin.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Habilidades</h2>
+    <dl class="skills">
+      <dt>Web con .NET</dt><dd>Blazor, ASP.NET Core, Razor, Web APIs, REST</dd>
+      <dt>Backend</dt><dd>C#, .NET, Entity Framework, LINQ, Python</dd>
+      <dt>Frontend</dt><dd>React, TypeScript, JavaScript, Vue, HTML/CSS</dd>
+      <dt>Herramientas</dt><dd>Git, SQL Server, Docker, Azure, Linux</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Educación</h2>
+    <div class="head">
+      <p><span class="title">Tecnología en Desarrollo de Sistemas Informáticos</span> · Universitaria Tecnológica de Santander (UTS)</p>
+      <p class="meta">en curso</p>
+    </div>
+  </section>
+</body>
+</html>
