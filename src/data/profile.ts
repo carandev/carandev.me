@@ -41,7 +41,7 @@ export const profile = {
   timezone: 'GMT-5',
   email: 'contacto@carandev.me',
   cvUrl: '/cv-carlos-gomez.pdf',
-  avatarUrl: 'https://avatars.githubusercontent.com/u/72842040',
+  avatarUrl: '/avatar.webp',
   links: {
     github: 'https://github.com/carandev',
     linkedin: 'https://linkedin.com/in/carandev'
