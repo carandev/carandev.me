@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { Badge, Card } from '@carandev/trazos-ui'
 import { GraduationCap } from 'lucide-react'
 
 import { profile } from '../data/profile'
@@ -27,12 +28,12 @@ export function Experience () {
             const current = isOngoing(job.end)
 
             return (
-              <li
-                key={`${job.company}-${job.start}`}
-                className={`${styles.job} ${current ? styles.jobCurrent : ''}`}
-                data-reveal=''
-                style={{ '--delay': `${i * 0.08}s` } as CSSProperties}
-              >
+              <li key={`${job.company}-${job.start}`}>
+                <Card
+                  className={`${styles.job} ${current ? styles.jobCurrent : ''}`}
+                  data-reveal=''
+                  style={{ '--delay': `${i * 0.08}s` } as CSSProperties}
+                >
                 <div className={styles.jobHead}>
                   <h3 className={styles.jobRole}>{job.role}</h3>
                   <span className={styles.period} data-end={job.end ?? undefined} data-live-period={job.start}>{formatPeriod(job.start, job.end)}</span>
@@ -47,6 +48,7 @@ export function Experience () {
                   {job.highlights.map(h => <li key={h}>{h}</li>)}
                 </ul>
                 {current && <span className={styles.currentTag}>actual</span>}
+                </Card>
               </li>
             )
           })}
@@ -59,7 +61,7 @@ export function Experience () {
             return (
               <li
                 key={item.degree}
-                className={`tone-${ongoing ? 'sky' : 'cream'} ${styles.study}`}
+                className={`hue-${ongoing ? 'sky' : 'cream'} ${styles.study}`}
                 data-reveal=''
                 style={{ '--delay': `${0.12 + i * 0.08}s` } as CSSProperties}
               >
@@ -70,7 +72,7 @@ export function Experience () {
                 </p>
                 <p className={styles.studyMeta}>
                   {item.start && `${formatYearMonth(item.start)} — ${ongoing ? 'hoy' : formatYearMonth(item.end as string)}`}
-                  <span className={`chip ${styles.studyChip}`}>{ongoing ? 'en curso' : 'finalizado'}</span>
+                  <Badge className={styles.studyChip}>{ongoing ? 'en curso' : 'finalizado'}</Badge>
                 </p>
               </li>
             )

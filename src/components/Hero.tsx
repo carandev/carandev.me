@@ -4,6 +4,7 @@ import { ArrowRight, MapPin } from 'lucide-react'
 import { profile } from '../data/profile'
 import { currentJob, firstJobStart, formatDuration, totalExperienceMonths } from '../lib/dates'
 import { Arrow } from './Sketch'
+import { LinkButton } from './LinkButton'
 import styles from './Hero.module.css'
 
 const delay = (s: number) => ({ '--delay': `${s}s` } as CSSProperties)
@@ -24,10 +25,14 @@ export function Hero () {
         </p>
 
         <div className={styles.actions} data-reveal='' style={delay(0.24)}>
-          <a className='btn btn--primary' href='#proyectos'>
-            Ver mis proyectos <ArrowRight aria-hidden='true' size={18} strokeWidth={2.4} />
-          </a>
-          <a className='btn btn--lavender' href='#contacto'>Hablemos</a>
+          <LinkButton
+            href='#proyectos'
+            size='large'
+            trailingIcon={<ArrowRight aria-hidden='true' size={18} strokeWidth={2.4} />}
+          >
+            Ver mis proyectos
+          </LinkButton>
+          <LinkButton href='#contacto' size='large' variant='lavender'>Hablemos</LinkButton>
         </div>
 
         <div className={styles.meta} data-reveal='' style={delay(0.32)}>

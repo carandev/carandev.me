@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
+import { Button } from '@carandev/trazos-ui'
 import { Check, Copy, Github, Linkedin, Mail } from 'lucide-react'
 
 import { profile } from '../data/profile'
+import { LinkButton } from './LinkButton'
 import styles from './Contact.module.css'
 
 export function Contact () {
   const [copied, setCopied] = useState(false)
-  const timer = useRef<number>()
+  const timer = useRef<number | undefined>(undefined)
 
   useEffect(() => () => window.clearTimeout(timer.current), [])
 
@@ -32,27 +34,40 @@ export function Contact () {
         </p>
 
         <div className={styles.actions}>
-          <a className='btn btn--primary' href={`mailto:${profile.email}`}>
-            <Mail aria-hidden='true' size={18} /> {profile.email}
-          </a>
-          <button
+          <LinkButton href={`mailto:${profile.email}`} leadingIcon={<Mail aria-hidden='true' size={18} />} size='large'>
+            {profile.email}
+          </LinkButton>
+          <Button
             aria-label={copied ? 'Correo copiado' : 'Copiar correo'}
-            className={`btn btn--outline ${styles.copy}`}
-            type='button'
+            className={styles.copy}
+            size='large'
+            variant='outline'
             onClick={copyEmail}
           >
             {copied ? <Check aria-hidden='true' size={18} /> : <Copy aria-hidden='true' size={18} />}
             <span aria-hidden='true' className={`${styles.copiedNote} ${copied ? styles.copiedVisible : ''}`}>¡copiado!</span>
-          </button>
+          </Button>
         </div>
 
         <div className={styles.socials}>
-          <a className='btn btn--outline btn--sm' href={profile.links.github} rel='noopener noreferrer' target='_blank'>
-            <Github aria-hidden='true' size={16} /> GitHub
-          </a>
-          <a className='btn btn--outline btn--sm' href={profile.links.linkedin} rel='noopener noreferrer' target='_blank'>
-            <Linkedin aria-hidden='true' size={16} /> LinkedIn
-          </a>
+          <LinkButton
+            href={profile.links.github}
+            leadingIcon={<Github aria-hidden='true' size={16} />}
+            rel='noopener noreferrer'
+            target='_blank'
+            variant='outline'
+          >
+            GitHub
+          </LinkButton>
+          <LinkButton
+            href={profile.links.linkedin}
+            leadingIcon={<Linkedin aria-hidden='true' size={16} />}
+            rel='noopener noreferrer'
+            target='_blank'
+            variant='outline'
+          >
+            LinkedIn
+          </LinkButton>
         </div>
         <p aria-live='polite' className='visually-hidden'>{copied ? 'Correo copiado al portapapeles' : ''}</p>
       </div>

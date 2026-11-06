@@ -33,7 +33,7 @@ export function About () {
           {profile.skills.map((group, i) => (
             <li
               key={group.title}
-              className={`tone-${group.tone} ${styles.skill}`}
+              className={`hue-${group.tone} ${styles.skill}`}
               data-reveal=''
               style={{ '--delay': `${0.1 + i * 0.08}s`, '--tilt': `${[0, 1, -1, 0.5][i % 4]}deg` } as CSSProperties}
             >

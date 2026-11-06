@@ -40,11 +40,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 24px;
-  background: var(--surface);
-  border: 1.5px solid var(--paper-border);
-  border-radius: var(--radius-card);
-  box-shadow: 2px 3px 0 rgba(44, 34, 30, 0.05), 0 6px 20px -4px rgba(62, 47, 40, 0.06);
+  flex: 1;
+  min-width: 0;
   transition:
     translate 0.35s var(--ease-out),
     rotate 0.35s var(--ease-spring),
@@ -53,7 +50,14 @@
     opacity 0.7s var(--ease-out) var(--delay, 0s),
     transform 0.7s var(--ease-out) var(--delay, 0s);
 }
-.card:nth-child(even) { border-radius: var(--radius-card-alt); }
+.card > :global(.trazos-card-body) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+.cardItem { display: flex; min-width: 0; }
+.cardItem:nth-child(even) .card { border-radius: var(--radius-card-alt); }
 
 .card:hover,
 .card:focus-within {
@@ -62,7 +66,7 @@
   border-color: var(--tone-border, var(--paper-border-strong));
   box-shadow: 4px 6px 0 color-mix(in srgb, var(--tone-ink, var(--ink)) 16%, transparent), 0 14px 30px -8px rgba(62, 47, 40, 0.12);
 }
-.card:nth-child(even):hover { rotate: 0.6deg; }
+.cardItem:nth-child(even) .card:hover { rotate: 0.6deg; }
 .card:hover :global(.tape) { --tape-rotate: 0deg; }
 
 .cardSkeleton { pointer-events: none; }

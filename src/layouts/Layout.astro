@@ -1,4 +1,5 @@
 ---
+import '@carandev/trazos-ui/styles.css'
 import '../styles/global.css'
 
 interface Props {
@@ -45,7 +46,7 @@ const ogImage = new URL('/og-image.png', Astro.site)
         try { stored = localStorage.getItem('theme') } catch {}
         const apply = (theme) => {
           root.dataset.theme = theme
-          meta?.setAttribute('content', theme === 'dark' ? '#1A1513' : '#FAF7F2')
+          meta?.setAttribute('content', theme === 'dark' ? '#1A1512' : '#FAF7F2')
         }
         apply(stored === 'dark' || stored === 'light' ? stored : (media.matches ? 'dark' : 'light'))
         media.addEventListener('change', (e) => {

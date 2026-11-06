@@ -4,6 +4,7 @@ import { Menu, Moon, Sun, X } from 'lucide-react'
 import { profile } from '../data/profile'
 import { useScrollSpy } from '../hooks/useScrollSpy'
 import { currentTheme, setTheme } from '../lib/theme'
+import { LinkButton } from './LinkButton'
 import { Circle } from './Sketch'
 import styles from './Navbar.module.css'
 
@@ -87,9 +88,9 @@ export function Navbar () {
               {link.label}
             </a>
           ))}
-          <a className={`btn btn--outline btn--sm ${styles.cv}`} href={profile.cvUrl} rel='noopener' target='_blank'>
+          <LinkButton className={styles.cv} href={profile.cvUrl} rel='noopener' target='_blank' variant='outline'>
             Descargar CV
-          </a>
+          </LinkButton>
         </nav>
       </div>
     </header>

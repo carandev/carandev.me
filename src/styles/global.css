@@ -3,92 +3,43 @@
    ========================================================================== */
 
 :root {
-  /* Tipografía */
-  --font-display: 'Marcellus', Georgia, serif;
-  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
-  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  /* Aliases over the Trazos UI tokens, which also define the dark theme */
+  --font-display: var(--trazos-font-display);
+  --font-hand: var(--trazos-font-hand);
+  --font-sans: var(--trazos-font-sans);
 
-  /* Tinta */
-  --ink: #2C221E;
-  --ink-light: #5A4C46;
-  --ink-strong: #15100E;
+  --ink: var(--trazos-text);
+  --ink-light: var(--trazos-text-light);
 
-  /* Pergamino */
-  --paper: #FAF7F2;
-  --paper-50: #FDFBF7;
-  --paper-200: #F4ECE0;
-  --paper-300: #E8DECE;
-  --paper-border: #E5DACB;
-  --paper-border-strong: #D8CBB7;
+  --paper: var(--trazos-page);
+  --paper-200: var(--trazos-color-parchment-200);
+  --paper-border: var(--trazos-border);
+  --paper-border-strong: var(--trazos-border-strong);
+  --surface: var(--trazos-surface);
+  --shadow-ink: rgb(var(--trazos-shadow-rgb));
 
-  /* Acentos */
-  --olive: #386F54;
-  --olive-dark: #1F3B2D;
-  --wine: #9B1D43;
-  --wine-500: #C0335C;
-  --gold: #B45309;
+  --olive: var(--trazos-color-olive-600);
+  --wine: var(--trazos-color-wine-600);
+  --wine-500: var(--trazos-color-wine-500);
+  --gold: var(--trazos-color-gold-600);
 
-  /* Pasteles (fondo / borde / texto) */
-  --lavender-bg: #E7E1F3; --lavender-soft: #F3F0F9; --lavender-border: #D4C5E8; --lavender-ink: #3E2C50; --lavender-accent: #5D4378;
-  --cream-bg: #FDF4DC;    --cream-soft: #FEFBF3;    --cream-border: #F5D384;    --cream-ink: #78350F;
-  --mint-bg: #E8F0EA;     --mint-soft: #F3F8F5;     --mint-border: #C5DCCB;     --mint-ink: #2D5843;
-  --rose-bg: #FBE4E8;     --rose-soft: #FDF2F4;     --rose-border: #F5BAC5;     --rose-ink: #851D41;
-  --sky-bg: #EAF0F8;      --sky-soft: #F5F8FC;      --sky-border: #C5D4E8;      --sky-ink: #3B5270;
+  --lavender-bg: var(--trazos-lavender-tint); --lavender-soft: var(--trazos-lavender-soft); --lavender-border: var(--trazos-lavender-border); --lavender-ink: var(--trazos-lavender-text-strong); --lavender-accent: var(--trazos-lavender-text);
+  --cream-bg: var(--trazos-gold-tint);        --cream-soft: var(--trazos-gold-soft);        --cream-border: var(--trazos-gold-tint-border);     --cream-ink: var(--trazos-gold-text-strong);
+  --mint-bg: var(--trazos-olive-tint);        --mint-soft: var(--trazos-olive-soft);        --mint-border: var(--trazos-olive-tint-border);     --mint-ink: var(--trazos-olive-text);
+  --rose-bg: var(--trazos-wine-tint);         --rose-soft: var(--trazos-wine-soft);         --rose-border: var(--trazos-wine-border);           --rose-ink: var(--trazos-wine-text);
+  --sky-bg: var(--trazos-sky-tint);           --sky-soft: var(--trazos-sky-soft);           --sky-border: var(--trazos-sky-border);             --sky-ink: var(--trazos-sky-text);
 
-  /* Curvas de trazo manual */
-  --radius-sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  --radius-card: 20px 24px 18px 22px / 22px 18px 24px 20px;
+  --radius-sketch: var(--trazos-radius-sketch);
+  --radius-card: var(--trazos-radius-sketch-card);
   --radius-card-alt: 22px 18px 24px 20px / 20px 24px 18px 22px;
-  --radius-sm: 14px 18px 12px 16px / 16px 12px 18px 14px;
-  --radius-chip: 12px 14px 10px 12px / 12px 10px 14px 12px;
+  --radius-sm: var(--trazos-radius-sketch-sm);
+  --radius-chip: var(--trazos-radius-sketch-btn);
   --radius-blob: 30px 40px 26px 44px / 40px 26px 44px 30px;
 
-  /* Movimiento */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --container: 1120px;
-
-  /* Theme-dependent roles */
-  --surface: #FFFFFF;
-  --shadow-ink: var(--ink);
-  --on-olive: #FFFFFF;
-  --olive-hover: #2D5843;
-
-  color-scheme: light;
-}
-
-/* Dark theme: warm "night notebook" with the same pastel hues, dimmed */
-:root[data-theme='dark'] {
-  --ink: #EDE4D8;
-  --ink-light: #B9AC9E;
-  --ink-strong: #FFF8EE;
-
-  --paper: #1A1513;
-  --paper-50: #201A17;
-  --paper-200: #2A2320;
-  --paper-300: #362D29;
-  --paper-border: #3A302B;
-  --paper-border-strong: #50443C;
-
-  --olive: #7DBF9C;
-  --olive-dark: #2A4F3C;
-  --wine: #F08AA6;
-  --wine-500: #EC7C9B;
-  --gold: #E9A957;
-
-  --lavender-bg: #2F2939; --lavender-soft: #26212E; --lavender-border: #4C4160; --lavender-ink: #DBCFF0; --lavender-accent: #BCA6DD;
-  --cream-bg: #352C1B;    --cream-soft: #2A2419;    --cream-border: #6D5628;    --cream-ink: #F3DAA2;
-  --mint-bg: #1F2E26;     --mint-soft: #1C2620;     --mint-border: #37513F;     --mint-ink: #B6D9C3;
-  --rose-bg: #3A2129;     --rose-soft: #2D1C22;     --rose-border: #6B3543;     --rose-ink: #F3B9C7;
-  --sky-bg: #1F2834;      --sky-soft: #1C222B;      --sky-border: #364B64;      --sky-ink: #BDD1EB;
-
-  --surface: #241E1B;
-  --shadow-ink: #0B0807;
-  --on-olive: #10241A;
-  --olive-hover: #97D0B1;
-
-  color-scheme: dark;
 }
 
 /* ---------- Base ---------- */
@@ -164,75 +115,22 @@ a { color: inherit; }
 .highlight--cream { background-image: linear-gradient(var(--cream-bg), var(--cream-bg)); }
 [data-visible] .highlight { background-size: 100% 45%; }
 
-/* ---------- Botones ---------- */
+/* ---------- Trazos UI adjustments ---------- */
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 12px 24px;
-  font: 700 16px/1.2 var(--font-sans);
-  text-decoration: none;
-  cursor: pointer;
-  border: 1.5px solid transparent;
-  border-radius: var(--radius-sketch);
-  transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out), background-color 0.18s ease;
-  user-select: none;
-}
-.btn svg { transition: transform 0.25s var(--ease-spring); }
-.btn:hover { transform: translate(-1px, -2px); }
-.btn:hover svg { transform: translateX(3px); }
-.btn:active { transform: translate(1px, 1px); transition-duration: 0.06s; }
+/* The library's Button sets no font, so native buttons would fall back to the system font */
+.trazos-btn { font-family: inherit; }
+/* Its icon wrappers are inline, which leaves icons off the text's optical center */
+.trazos-btn-leading-icon, .trazos-btn-trailing-icon { display: inline-flex; }
+.trazos-btn-trailing-icon { transition: translate 0.25s var(--ease-spring); }
+.trazos-btn:hover .trazos-btn-trailing-icon { translate: 3px 0; }
 
-.btn--primary {
-  background: var(--olive); color: var(--on-olive);
-  border-color: var(--olive-dark);
-  box-shadow: 3px 4px 0 var(--olive-dark);
-}
-.btn--primary:hover { background: var(--olive-hover); box-shadow: 5px 6px 0 var(--olive-dark); }
-.btn--primary:active { box-shadow: 1px 1px 0 var(--olive-dark); }
+/* ---------- Tonos ---------- */
 
-.btn--lavender {
-  background: var(--lavender-bg); color: var(--lavender-ink);
-  border-color: var(--lavender-border);
-  border-radius: var(--radius-sm);
-  box-shadow: 2px 3px 0 rgba(93, 67, 120, 0.18);
-}
-.btn--lavender:hover { background: var(--lavender-border); box-shadow: 4px 5px 0 rgba(93, 67, 120, 0.22); }
-
-.btn--outline {
-  background: var(--surface); color: var(--ink);
-  border-color: var(--paper-border-strong);
-  border-radius: var(--radius-sm);
-  box-shadow: 2px 2px 0 rgba(44, 34, 30, 0.08);
-}
-.btn--outline:hover { background: var(--paper-200); box-shadow: 4px 4px 0 rgba(44, 34, 30, 0.1); }
-
-.btn--sm { min-height: 40px; padding: 8px 16px; font-size: 14px; }
-
-/* ---------- Chips / badges ---------- */
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid var(--paper-border-strong);
-  border-radius: var(--radius-chip);
-  background: var(--surface);
-  color: var(--ink-light);
-  white-space: nowrap;
-}
-
-.tone-lavender { --tone-bg: var(--lavender-bg); --tone-soft: var(--lavender-soft); --tone-border: var(--lavender-border); --tone-ink: var(--lavender-ink); }
-.tone-cream    { --tone-bg: var(--cream-bg);    --tone-soft: var(--cream-soft);    --tone-border: var(--cream-border);    --tone-ink: var(--cream-ink); }
-.tone-mint     { --tone-bg: var(--mint-bg);     --tone-soft: var(--mint-soft);     --tone-border: var(--mint-border);     --tone-ink: var(--mint-ink); }
-.tone-rose     { --tone-bg: var(--rose-bg);     --tone-soft: var(--rose-soft);     --tone-border: var(--rose-border);     --tone-ink: var(--rose-ink); }
-.tone-sky      { --tone-bg: var(--sky-bg);      --tone-soft: var(--sky-soft);      --tone-border: var(--sky-border);      --tone-ink: var(--sky-ink); }
+.hue-lavender { --tone-bg: var(--lavender-bg); --tone-soft: var(--lavender-soft); --tone-border: var(--lavender-border); --tone-ink: var(--lavender-ink); }
+.hue-cream    { --tone-bg: var(--cream-bg);    --tone-soft: var(--cream-soft);    --tone-border: var(--cream-border);    --tone-ink: var(--cream-ink); }
+.hue-mint     { --tone-bg: var(--mint-bg);     --tone-soft: var(--mint-soft);     --tone-border: var(--mint-border);     --tone-ink: var(--mint-ink); }
+.hue-rose     { --tone-bg: var(--rose-bg);     --tone-soft: var(--rose-soft);     --tone-border: var(--rose-border);     --tone-ink: var(--rose-ink); }
+.hue-sky      { --tone-bg: var(--sky-bg);      --tone-soft: var(--sky-soft);      --tone-border: var(--sky-border);      --tone-ink: var(--sky-ink); }
 
 /* ---------- Cinta adhesiva ---------- */
 
@@ -270,24 +168,6 @@ a { color: inherit; }
     transform 0.7s var(--ease-out) var(--delay, 0s);
 }
 [data-reveal][data-visible] { opacity: 1; transform: none; }
-
-/* ---------- Esqueleto de carga ---------- */
-
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  background: var(--paper-200);
-  border-radius: var(--radius-sm);
-}
-.skeleton::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface) 65%, transparent), transparent);
-  animation: shimmer 1.4s infinite;
-}
-@keyframes shimmer { to { transform: translateX(100%); } }
 
 /* ---------- Movimiento reducido ---------- */
 

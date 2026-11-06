@@ -66,5 +66,5 @@
 
 @media (max-width: 480px) {
   .box { padding: 44px 20px; }
-  .actions .btn:first-child { font-size: 15px; padding-inline: 18px; }
+  .actions a:first-child { font-size: 15px; padding-inline: 18px; }
 }

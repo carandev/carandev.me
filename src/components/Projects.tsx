@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from 'react'
+import { Badge, Button, Card, Skeleton } from '@carandev/trazos-ui'
 import { ArrowUpRight, Github, Star } from 'lucide-react'
 
 import { profile, type Tone } from '../data/profile'
@@ -23,11 +24,12 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
   const mainUrl = project.demoUrl ?? project.repoUrl
 
   return (
-    <article
-      className={`tone-${tone} ${styles.card}`}
-      data-reveal=''
-      style={{ '--delay': `${index * 0.1}s` } as CSSProperties}
-    >
+    <article className={styles.cardItem}>
+      <Card
+        className={`hue-${tone} ${styles.card}`}
+        data-reveal=''
+        style={{ '--delay': `${index * 0.1}s` } as CSSProperties}
+      >
       <span
         aria-hidden='true'
         className='tape'
@@ -61,15 +63,16 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
 
       <ul aria-label='Tecnologías' className={styles.tags}>
         {project.language && (
-          <li className='chip'>
-            <span aria-hidden='true' className={styles.langDot} style={{ background: project.language.color ?? 'var(--ink-light)' }} />
-            {project.language.name}
+          <li>
+            <Badge leadingIcon={<span aria-hidden='true' className={styles.langDot} style={{ background: project.language.color ?? 'var(--ink-light)' }} />}>
+              {project.language.name}
+            </Badge>
           </li>
         )}
-        {project.topics.slice(0, 3).map(t => <li key={t} className='chip'>{t}</li>)}
+        {project.topics.slice(0, 3).map(t => <li key={t}><Badge>{t}</Badge></li>)}
         {project.stars > 0 && (
-          <li className='chip'>
-            <Star aria-hidden='true' size={12} /> {project.stars}
+          <li>
+            <Badge leadingIcon={<Star aria-hidden='true' size={12} />}>{project.stars}</Badge>
           </li>
         )}
       </ul>
@@ -86,6 +89,7 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
           </a>
         )}
       </div>
+      </Card>
     </article>
   )
 }
@@ -116,11 +120,13 @@ function LoadingState () {
   return (
     <div aria-busy='true' aria-label='Cargando proyectos' className={styles.grid}>
       {[0, 1, 2].map(i => (
-        <div key={i} className={`${styles.card} ${styles.cardSkeleton}`}>
-          <div className={`skeleton ${styles.media}`} />
-          <div className='skeleton' style={{ height: 26, width: '60%' }} />
-          <div className='skeleton' style={{ height: 14, width: '95%' }} />
-          <div className='skeleton' style={{ height: 14, width: '80%' }} />
+        <div key={i} className={styles.cardItem}>
+          <Card className={`${styles.card} ${styles.cardSkeleton}`}>
+            <Skeleton className={styles.media} height='auto' variant='rounded' />
+            <Skeleton height='26px' width='60%' />
+            <Skeleton height='14px' width='95%' />
+            <Skeleton height='14px' width='80%' />
+          </Card>
         </div>
       ))}
     </div>
@@ -170,9 +176,9 @@ export function Projects () {
                 ))}
               </ul>
               {state.others.length > OTHERS_PREVIEW && (
-                <button className={`btn btn--outline btn--sm ${styles.more}`} type='button' onClick={() => setShowAll(v => !v)}>
+                <Button className={styles.more} variant='outline' onClick={() => setShowAll(v => !v)}>
                   {showAll ? 'Ver menos' : `Ver ${state.others.length - OTHERS_PREVIEW} más`}
-                </button>
+                </Button>
               )}
             </div>
           )}

@@ -1,6 +1,6 @@
 export type Theme = 'light' | 'dark'
 
-const THEME_COLORS: Record<Theme, string> = { light: '#FAF7F2', dark: '#1A1513' }
+const THEME_COLORS: Record<Theme, string> = { light: '#FAF7F2', dark: '#1A1512' }
 
 export function currentTheme (): Theme {
   return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
