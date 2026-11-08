@@ -1,10 +1,9 @@
 import type { CSSProperties } from 'react'
+import { LinkButton, SketchArrow, Tape } from '@carandev/trazos-ui'
 import { ArrowRight, MapPin } from 'lucide-react'
 
 import { profile } from '../data/profile'
 import { currentJob, firstJobStart, formatDuration, totalExperienceMonths } from '../lib/dates'
-import { Arrow } from './Sketch'
-import { LinkButton } from './LinkButton'
 import styles from './Hero.module.css'
 
 const delay = (s: number) => ({ '--delay': `${s}s` } as CSSProperties)
@@ -58,9 +57,9 @@ export function Hero () {
             src={profile.avatarUrl}
             width={420}
           />
-          <span aria-hidden='true' className='tape' style={{ left: '50%', marginLeft: -42, top: -14, '--tape-rotate': '-4deg' } as CSSProperties} />
+          <Tape className={styles.tape} rotate={-4} />
           <p aria-hidden='true' className={styles.note}>ese soy yo</p>
-          <Arrow className={styles.arrow} />
+          <SketchArrow className={`sketch ${styles.arrow}`} color='var(--lavender-accent)' />
         </div>
       </div>
     </section>

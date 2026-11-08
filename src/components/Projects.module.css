@@ -37,8 +37,6 @@
 
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
   gap: 12px;
   flex: 1;
   min-width: 0;
@@ -50,12 +48,7 @@
     opacity 0.7s var(--ease-out) var(--delay, 0s),
     transform 0.7s var(--ease-out) var(--delay, 0s);
 }
-.card > :global(.trazos-card-body) {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 12px;
-}
+.card > :global(.trazos-card-body) { gap: 12px; }
 .cardItem { display: flex; min-width: 0; }
 .cardItem:nth-child(even) .card { border-radius: var(--radius-card-alt); }
 
@@ -67,7 +60,6 @@
   box-shadow: 4px 6px 0 color-mix(in srgb, var(--tone-ink, var(--ink)) 16%, transparent), 0 14px 30px -8px rgba(62, 47, 40, 0.12);
 }
 .cardItem:nth-child(even) .card:hover { rotate: 0.6deg; }
-.card:hover :global(.tape) { --tape-rotate: 0deg; }
 
 .cardSkeleton { pointer-events: none; }
 

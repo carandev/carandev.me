@@ -1,29 +1,13 @@
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: transparent;
-  border-bottom: 1.5px solid transparent;
-  transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
-}
-
-.scrolled {
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom-color: var(--paper-border);
-}
-
-.inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 76px;
+/* Align the library header with the page container */
+.header > :global(.trazos-site-header-inner) {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: 24px;
 }
 
 .logo {
   position: relative;
+  display: inline-block;
   padding: 2px 14px;
   font-family: var(--font-hand);
   font-size: 34px;
@@ -43,108 +27,10 @@
   pointer-events: none;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: auto;
-}
-
-.link {
-  position: relative;
-  padding: 10px 14px;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  color: var(--ink-light);
-  transition: color 0.2s ease;
-}
-
-/* Subrayado "a mano" que crece al pasar el ratón y marca la sección actual */
-.link::after {
-  content: '';
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 4px;
-  height: 6px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M1 4 C 25 1, 50 6, 75 3 S 95 2, 99 4' fill='none' stroke='%23C0335C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s var(--ease-out);
-}
-.link:hover, .link[aria-current] { color: var(--ink); }
-.link:hover::after, .link[aria-current]::after { transform: scaleX(1); }
-
-.cv { margin-left: 8px; }
-
-.menuButton {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: var(--surface);
-  color: var(--ink);
-  border: 1.5px solid var(--paper-border-strong);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
+/* Same breakpoint as the library header */
+.cvLink { display: none; }
 
 @media (max-width: 760px) {
-  .menuButton { display: inline-flex; }
-
-  .nav {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 16px;
-    right: 16px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2px;
-    padding: 12px;
-    background: var(--surface);
-    border: 1.5px solid var(--ink);
-    border-radius: var(--radius-card);
-    box-shadow: 4px 5px 0 var(--shadow-ink);
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-    pointer-events: none;
-    visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.25s var(--ease-out), visibility 0s linear 0.25s;
-  }
-  .navOpen {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    visibility: visible;
-    transition: opacity 0.2s ease, transform 0.25s var(--ease-out), visibility 0s;
-  }
-  .link { padding: 12px 14px; font-size: 16px; }
-  .link::after { left: 14px; right: auto; width: 60px; }
-  .cv { margin: 8px 0 0; }
-}
-
-.themeButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  order: 1;
-  background: transparent;
-  color: var(--ink);
-  border: 1.5px solid transparent;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.3s var(--ease-spring);
-}
-.themeButton:hover { border-color: var(--paper-border-strong); transform: rotate(-12deg); }
-
-.iconSun { display: none; }
-:global([data-theme='dark']) .iconMoon { display: none; }
-:global([data-theme='dark']) .iconSun { display: block; }
-
-@media (max-width: 760px) {
-  .themeButton { order: 0; margin-left: auto; }
+  .cv { display: none; }
+  .cvLink { display: block; }
 }

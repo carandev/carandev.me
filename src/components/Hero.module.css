@@ -101,7 +101,7 @@
 
 .photo:hover .photoImg { rotate: -2deg; box-shadow: 7px 8px 0 var(--shadow-ink); }
 .photo:hover .photoBack { rotate: 8deg; translate: 6px 4px; }
-.photo:hover :global(.tape) { --tape-rotate: 3deg; }
+.photo .tape { top: -14px; }
 
 .note {
   position: absolute;

@@ -1,98 +1,58 @@
-import { useEffect, useState } from 'react'
-import { Menu, Moon, Sun, X } from 'lucide-react'
+import { LinkButton, SiteHeader, SketchCircle, ThemeToggle, useScrollSpy, type SiteHeaderLink } from '@carandev/trazos-ui'
+import { Moon, Sun } from 'lucide-react'
 
 import { profile } from '../data/profile'
-import { useScrollSpy } from '../hooks/useScrollSpy'
-import { currentTheme, setTheme } from '../lib/theme'
-import { LinkButton } from './LinkButton'
-import { Circle } from './Sketch'
+import { THEME_STORAGE_KEY } from '../lib/theme'
 import styles from './Navbar.module.css'
 
-const LINKS = [
+const SECTIONS = [
   { id: 'sobre-mi', label: 'Sobre mí' },
   { id: 'experiencia', label: 'Experiencia' },
   { id: 'proyectos', label: 'Proyectos' },
   { id: 'contacto', label: 'Contacto' }
 ]
-const SECTION_IDS = LINKS.map(l => l.id)
+const SECTION_IDS = SECTIONS.map(s => s.id)
+
+const CV_LINK = { href: profile.cvUrl, rel: 'noopener', target: '_blank' }
+
+const LINKS: SiteHeaderLink[] = [
+  ...SECTIONS.map(s => ({ href: `#${s.id}`, label: s.label })),
+  // The header actions stay visible on mobile, so there the CV moves into the menu
+  { ...CV_LINK, label: 'Descargar CV', className: styles.cvLink }
+]
 
 export function Navbar () {
   const active = useScrollSpy(SECTION_IDS)
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    if (!menuOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false) }
-
-    window.addEventListener('keydown', onKey)
-
-    return () => window.removeEventListener('keydown', onKey)
-  }, [menuOpen])
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={`container ${styles.inner}`}>
-        {/* reveal.ts may mark this element before hydration */}
-        <a
-          suppressHydrationWarning
-          className={styles.logo}
-          data-reveal=''
-          href='#inicio'
-        >
+    <SiteHeader
+      actions={(
+        <>
+          <ThemeToggle
+            label='Cambiar tema claro u oscuro'
+            moonIcon={<Moon aria-hidden='true' size={20} />}
+            storageKey={THEME_STORAGE_KEY}
+            sunIcon={<Sun aria-hidden='true' size={20} />}
+            title='Cambiar tema'
+            variant='ghost'
+          />
+          <LinkButton {...CV_LINK} className={styles.cv} variant='outline'>Descargar CV</LinkButton>
+        </>
+      )}
+      activeHref={active ? `#${active}` : undefined}
+      className={styles.header}
+      closeMenuLabel='Cerrar menú'
+      currentType='location'
+      links={LINKS}
+      logo={(
+        // reveal.ts may mark this element before hydration
+        <a suppressHydrationWarning className={styles.logo} data-reveal='' href='#inicio'>
           carandev
-          <Circle className={styles.logoCircle} />
+          <SketchCircle className={`sketch ${styles.logoCircle}`} />
         </a>
-
-        <button
-          aria-label='Cambiar tema claro u oscuro'
-          className={styles.themeButton}
-          title='Cambiar tema'
-          type='button'
-          onClick={() => setTheme(currentTheme() === 'dark' ? 'light' : 'dark')}
-        >
-          {/* CSS shows the icon for the active theme, so server HTML never mismatches */}
-          <Moon aria-hidden='true' className={styles.iconMoon} size={20} />
-          <Sun aria-hidden='true' className={styles.iconSun} size={20} />
-        </button>
-
-        <button
-          aria-controls='nav-links'
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          className={styles.menuButton}
-          type='button'
-          onClick={() => setMenuOpen(o => !o)}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-
-        <nav aria-label='Principal' className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`} id='nav-links'>
-          {LINKS.map(link => (
-            <a
-              key={link.id}
-              aria-current={active === link.id ? 'location' : undefined}
-              className={styles.link}
-              href={`#${link.id}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <LinkButton className={styles.cv} href={profile.cvUrl} rel='noopener' target='_blank' variant='outline'>
-            Descargar CV
-          </LinkButton>
-        </nav>
-      </div>
-    </header>
+      )}
+      navLabel='Principal'
+      openMenuLabel='Abrir menú'
+    />
   )
 }

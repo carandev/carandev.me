@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from 'react'
-import { Badge, Button, Card, Skeleton } from '@carandev/trazos-ui'
+import { Badge, Button, Card, Skeleton, Tape, type TapePosition } from '@carandev/trazos-ui'
 import { ArrowUpRight, Github, Star } from 'lucide-react'
 
 import { profile, type Tone } from '../data/profile'
@@ -9,10 +9,10 @@ import type { Project } from '../types/github'
 import styles from './Projects.module.css'
 
 const FEATURED_TONES: Tone[] = ['lavender', 'cream', 'mint']
-const TAPE: { color: string, rotate: string, left: string }[] = [
-  { color: 'rgba(212, 197, 232, 0.85)', rotate: '-3deg', left: '28px' },
-  { color: 'rgba(245, 211, 132, 0.85)', rotate: '4deg', left: 'calc(100% - 112px)' },
-  { color: 'rgba(197, 220, 203, 0.9)', rotate: '-2deg', left: '40%' }
+const TAPE: { color: string, rotate: number, position: TapePosition }[] = [
+  { color: 'rgba(212, 197, 232, 0.85)', rotate: -3, position: 'top-left' },
+  { color: 'rgba(245, 211, 132, 0.85)', rotate: 4, position: 'top-right' },
+  { color: 'rgba(197, 220, 203, 0.9)', rotate: -2, position: 'top' }
 ]
 const OTHERS_PREVIEW = 6
 
@@ -27,14 +27,11 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
     <article className={styles.cardItem}>
       <Card
         className={`hue-${tone} ${styles.card}`}
+        fill
         data-reveal=''
         style={{ '--delay': `${index * 0.1}s` } as CSSProperties}
       >
-      <span
-        aria-hidden='true'
-        className='tape'
-        style={{ left: tape.left, '--tape-color': tape.color, '--tape-rotate': tape.rotate } as CSSProperties}
-      />
+      <Tape {...tape} />
 
       <div className={styles.media}>
         {project.imageUrl && !imageFailed
@@ -121,7 +118,7 @@ function LoadingState () {
     <div aria-busy='true' aria-label='Cargando proyectos' className={styles.grid}>
       {[0, 1, 2].map(i => (
         <div key={i} className={styles.cardItem}>
-          <Card className={`${styles.card} ${styles.cardSkeleton}`}>
+          <Card fill className={`${styles.card} ${styles.cardSkeleton}`}>
             <Skeleton className={styles.media} height='auto' variant='rounded' />
             <Skeleton height='26px' width='60%' />
             <Skeleton height='14px' width='95%' />

@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react'
+import { SketchUnderline } from '@carandev/trazos-ui'
 
 import { profile } from '../data/profile'
 import { currentStudies, firstJobStart, formatDuration, totalExperienceMonths } from '../lib/dates'
-import { Underline } from './Sketch'
 import styles from './About.module.css'
 
 export function About () {
@@ -15,7 +15,7 @@ export function About () {
         <div className={styles.text} data-reveal=''>
           <p className='eyebrow'>01 · sobre mí</p>
           <h2 className='section-title'>Código limpio, proyectos completos y ganas de aprender</h2>
-          <Underline className={styles.underline} />
+          <SketchUnderline className={`sketch ${styles.underline}`} color='var(--wine-500)' />
           <p className={styles.paragraph}>
             Tengo <span data-live-duration={firstJobStart(profile.jobs)}>{experience}</span> de experiencia desarrollando aplicaciones web, principalmente con Blazor y .NET,
             tanto del lado del cliente como del servidor. Me muevo cómodo consumiendo servicios web, diseñando

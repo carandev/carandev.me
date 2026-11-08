@@ -78,13 +78,6 @@ a { color: inherit; }
   padding-inline: 24px;
 }
 
-.visually-hidden {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 /* ---------- Tipografía de apoyo ---------- */
 
 .eyebrow {
@@ -117,10 +110,7 @@ a { color: inherit; }
 
 /* ---------- Trazos UI adjustments ---------- */
 
-/* The library's Button sets no font, so native buttons would fall back to the system font */
-.trazos-btn { font-family: inherit; }
-/* Its icon wrappers are inline, which leaves icons off the text's optical center */
-.trazos-btn-leading-icon, .trazos-btn-trailing-icon { display: inline-flex; }
+/* Nudges trailing arrows forward on hover */
 .trazos-btn-trailing-icon { transition: translate 0.25s var(--ease-spring); }
 .trazos-btn:hover .trazos-btn-trailing-icon { translate: 3px 0; }
 
@@ -132,28 +122,13 @@ a { color: inherit; }
 .hue-rose     { --tone-bg: var(--rose-bg);     --tone-soft: var(--rose-soft);     --tone-border: var(--rose-border);     --tone-ink: var(--rose-ink); }
 .hue-sky      { --tone-bg: var(--sky-bg);      --tone-soft: var(--sky-soft);      --tone-border: var(--sky-border);      --tone-ink: var(--sky-ink); }
 
-/* ---------- Cinta adhesiva ---------- */
-
-.tape {
-  position: absolute;
-  top: -12px;
-  width: 84px;
-  height: 24px;
-  background: var(--tape-color, rgba(245, 211, 132, 0.8));
-  transform: rotate(var(--tape-rotate, -3deg));
-  transition: transform 0.35s var(--ease-spring);
-  pointer-events: none;
-}
-
 /* ---------- Trazos SVG que se dibujan ---------- */
 
+/* The library sketches animate on mount; these draw them when their section scrolls into view instead */
 .sketch path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.1s var(--ease-out) var(--draw-delay, 0.2s);
+  transition: stroke-dashoffset 1.1s var(--ease-out) calc(0.2s + var(--trazos-sketch-delay, 0s));
 }
 [data-visible] .sketch path,
 .sketch[data-visible] path { stroke-dashoffset: 0; }

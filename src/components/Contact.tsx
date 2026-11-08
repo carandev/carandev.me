@@ -1,28 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
-import { Button } from '@carandev/trazos-ui'
+import { CopyButton, LinkButton } from '@carandev/trazos-ui'
 import { Check, Copy, Github, Linkedin, Mail } from 'lucide-react'
 
 import { profile } from '../data/profile'
-import { LinkButton } from './LinkButton'
 import styles from './Contact.module.css'
 
 export function Contact () {
-  const [copied, setCopied] = useState(false)
-  const timer = useRef<number | undefined>(undefined)
-
-  useEffect(() => () => window.clearTimeout(timer.current), [])
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(profile.email)
-      setCopied(true)
-      window.clearTimeout(timer.current)
-      timer.current = window.setTimeout(() => setCopied(false), 2000)
-    } catch {
-      window.location.href = `mailto:${profile.email}`
-    }
-  }
-
   return (
     <section className='container' id='contacto'>
       {/* reveal.ts may mark this element before hydration */}
@@ -37,16 +19,16 @@ export function Contact () {
           <LinkButton href={`mailto:${profile.email}`} leadingIcon={<Mail aria-hidden='true' size={18} />} size='large'>
             {profile.email}
           </LinkButton>
-          <Button
-            aria-label={copied ? 'Correo copiado' : 'Copiar correo'}
-            className={styles.copy}
+          <CopyButton
+            checkIcon={<Check aria-hidden='true' size={18} />}
+            copiedLabel='¡copiado!'
+            fallback={email => { window.location.href = `mailto:${email}` }}
+            icon={<Copy aria-hidden='true' size={18} />}
+            label='Copiar correo'
             size='large'
+            value={profile.email}
             variant='outline'
-            onClick={copyEmail}
-          >
-            {copied ? <Check aria-hidden='true' size={18} /> : <Copy aria-hidden='true' size={18} />}
-            <span aria-hidden='true' className={`${styles.copiedNote} ${copied ? styles.copiedVisible : ''}`}>¡copiado!</span>
-          </Button>
+          />
         </div>
 
         <div className={styles.socials}>
@@ -69,7 +51,6 @@ export function Contact () {
             LinkedIn
           </LinkButton>
         </div>
-        <p aria-live='polite' className='visually-hidden'>{copied ? 'Correo copiado al portapapeles' : ''}</p>
       </div>
     </section>
   )
