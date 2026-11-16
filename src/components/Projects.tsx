@@ -59,13 +59,13 @@ function FeaturedCard ({ project, index }: { project: Project, index: number }) 
       <p className={styles.description}>{project.description ?? 'Sin descripción por ahora.'}</p>
 
       <ul aria-label='Tecnologías' className={styles.tags}>
-        {project.language && (
-          <li>
-            <Badge leadingIcon={<span aria-hidden='true' className={styles.langDot} style={{ background: project.language.color ?? 'var(--ink-light)' }} />}>
-              {project.language.name}
+        {project.languages.map(language => (
+          <li key={language.name}>
+            <Badge leadingIcon={<span aria-hidden='true' className={styles.langDot} style={{ background: language.color ?? 'var(--ink-light)' }} />}>
+              {language.name}
             </Badge>
           </li>
-        )}
+        ))}
         {project.topics.slice(0, 3).map(t => <li key={t}><Badge>{t}</Badge></li>)}
         {project.stars > 0 && (
           <li>

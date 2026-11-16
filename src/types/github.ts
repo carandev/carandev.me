@@ -1,3 +1,5 @@
+export interface Language { name: string, color: string | null }
+
 /** Project as returned by /api/repos (see src/lib/projects.ts). */
 export interface Project {
   name: string
@@ -5,7 +7,9 @@ export interface Project {
   repoUrl: string | null
   demoUrl: string | null
   imageUrl: string | null
-  language: { name: string, color: string | null } | null
+  language: Language | null
+  /** Every language GitHub detects, largest first. */
+  languages: Language[]
   topics: string[]
   stars: number
   pushedAt: string

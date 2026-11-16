@@ -64,6 +64,7 @@ const QUERY = `
           openGraphImageUrl
           usesCustomOpenGraphImage
           primaryLanguage { name color }
+          languages(first: 20, orderBy: { field: SIZE, direction: DESC }) { nodes { name color } }
           repositoryTopics(first: 20) { nodes { topic { name } } }
         }
       }
@@ -84,6 +85,7 @@ interface GraphQLRepo {
   openGraphImageUrl: string
   usesCustomOpenGraphImage: boolean
   primaryLanguage: { name: string, color: string | null } | null
+  languages: { nodes: { name: string, color: string | null }[] }
   repositoryTopics: { nodes: { topic: { name: string } }[] }
 }
 
@@ -108,6 +110,10 @@ function toProject (repo: GraphQLRepo, featured: boolean): Project {
     // publicly reachable). withRepoImages() may replace it with an image file from the repo.
     imageUrl: repo.isPrivate ? null : repo.openGraphImageUrl,
     language: repo.primaryLanguage,
+    // Largest first, so the primary language leads
+    languages: repo.languages.nodes.length > 0
+      ? repo.languages.nodes
+      : repo.primaryLanguage ? [repo.primaryLanguage] : [],
     topics: topics.filter(t => !HIDDEN_TOPICS.has(t)),
     stars: repo.stargazerCount,
     pushedAt: repo.pushedAt,
