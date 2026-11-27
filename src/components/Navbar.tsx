@@ -12,17 +12,29 @@ const SECTIONS = [
   { id: 'contacto', label: 'Contacto' }
 ]
 const SECTION_IDS = SECTIONS.map(s => s.id)
+const NO_SECTIONS: string[] = []
+const BLOG_HREF = '/blog/'
 
 const CV_LINK = { href: profile.cvUrl, rel: 'noopener', target: '_blank' }
 
-const LINKS: SiteHeaderLink[] = [
-  ...SECTIONS.map(s => ({ href: `#${s.id}`, label: s.label })),
+/** Section anchors are relative on the home page and point back to it from other pages. */
+const buildLinks = (base: string): SiteHeaderLink[] => [
+  ...SECTIONS.map(s => ({ href: `${base}#${s.id}`, label: s.label })),
+  { href: BLOG_HREF, label: 'Blog' },
   // The header actions stay visible on mobile, so there the CV moves into the menu
   { ...CV_LINK, label: 'Descargar CV', className: styles.cvLink }
 ]
 
-export function Navbar () {
-  const active = useScrollSpy(SECTION_IDS)
+interface NavbarProps {
+  /** Page the navbar is rendered on. */
+  current?: 'home' | 'blog'
+}
+
+export function Navbar ({ current = 'home' }: NavbarProps) {
+  const isHome = current === 'home'
+  const base = isHome ? '' : '/'
+  const spied = useScrollSpy(isHome ? SECTION_IDS : NO_SECTIONS)
+  const activeHref = isHome ? (spied ? `#${spied}` : undefined) : BLOG_HREF
 
   return (
     <SiteHeader
@@ -39,14 +51,14 @@ export function Navbar () {
           <LinkButton {...CV_LINK} className={styles.cv} variant='outline'>Descargar CV</LinkButton>
         </>
       )}
-      activeHref={active ? `#${active}` : undefined}
+      activeHref={activeHref}
       className={styles.header}
       closeMenuLabel='Cerrar menú'
       currentType='location'
-      links={LINKS}
+      links={buildLinks(base)}
       logo={(
         // reveal.ts may mark this element before hydration
-        <a suppressHydrationWarning className={styles.logo} data-reveal='' href='#inicio'>
+        <a suppressHydrationWarning className={styles.logo} data-reveal='' href={`${base}#inicio`}>
           carandev
           <SketchCircle className={`sketch ${styles.logoCircle}`} />
         </a>
