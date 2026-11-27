@@ -40,6 +40,8 @@ npm run dev
 
 Abre `http://localhost:4321/keystatic`. En desarrollo el panel usa el modo **local**: guarda los archivos directamente en tu disco y no pide inicio de sesión. Después haces commit y push como con cualquier otro cambio.
 
+> **Cuidado en redes que no son tuyas:** `npm run dev` usa `--host`, así que otros equipos de tu red pueden abrir el panel y guardar artículos o imágenes sin iniciar sesión. Solo pueden escribir en `src/content/blog/` y `src/assets/blog/`. En una red pública usa `npx astro dev`: sin `--host`, el servidor solo escucha en `127.0.0.1`.
+
 ## Escribir en producción (carandev.me/keystatic)
 
 En producción el panel siempre usa el modo **GitHub**:
@@ -56,10 +58,12 @@ En producción el panel siempre usa el modo **GitHub**:
    ```
 
    Abre `http://127.0.0.1:4321/keystatic` y sigue el asistente. Este crea la GitHub App y escribe en tu `.env` las variables `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
-2. En la configuración de la GitHub App, en *Callback URL*, agrega `https://carandev.me/api/keystatic/github/oauth/callback`.
+2. Si en el asistente no indicaste la URL desplegada (`https://carandev.me`), agrega en la configuración de la GitHub App, en *Callback URL*, `https://carandev.me/api/keystatic/github/oauth/callback`.
 3. Instala la app solo en el repositorio `carandev/carandev.me`.
 4. Copia las cuatro variables en Vercel, en *Project → Settings → Environment Variables*, y vuelve a desplegar.
 
 Las variables de Keystatic son secretos de servidor, salvo `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. No las subas al repositorio.
 
-Si falta alguna en producción, `/api/keystatic` responde con error y el panel no permite iniciar sesión. El resto del sitio no se ve afectado.
+Si en producción falta `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET` o `KEYSTATIC_SECRET`, `/api/keystatic` responde con error y el panel no permite iniciar sesión ni guardar. El resto del sitio no se ve afectado. Si falta `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`, solo se ven afectados los enlaces del panel a la GitHub App.
+
+Quien inicie sesión sin permiso de escritura verá la opción de hacer un fork, pero no podrá escribir en `carandev/carandev.me`.
