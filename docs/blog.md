@@ -59,7 +59,9 @@ En producción el panel siempre usa el modo **GitHub**:
    PUBLIC_KEYSTATIC_STORAGE=github npm run dev
    ```
 
-   Abre `http://127.0.0.1:4321/keystatic` y sigue el asistente. Este crea la GitHub App y escribe en tu `.env` las variables `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
+   Abre `http://127.0.0.1:4321/keystatic` y sigue el asistente.
+
+   En el campo *Deployed App URL*, **pega** `https://carandev.me` completo; no lo escribas letra por letra. Keystatic (0.6.10) intenta convertir el texto en URL con cada tecla, y con un texto parcial como `h` la pantalla se cae con `Failed to construct 'URL': Invalid base URL`. Otra opción es dejar el campo vacío y agregar después la callback URL de producción en GitHub (paso 2). En la consola también verás un `404` en `/api/keystatic/github/refresh-token` y un aviso de React sobre `value` sin `onChange`. Ambos son normales mientras la app no existe. Este crea la GitHub App y escribe en tu `.env` las variables `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
 2. Si en el asistente no indicaste la URL desplegada (`https://carandev.me`), agrega en la configuración de la GitHub App, en *Callback URL*, `https://carandev.me/api/keystatic/github/oauth/callback`.
 3. Instala la app solo en el repositorio `carandev/carandev.me`.
 4. Copia las cuatro variables en Vercel, en *Project → Settings → Environment Variables*, y vuelve a desplegar.
