@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro'
-import { Image } from 'astro:assets'
+import { getImage, Image } from 'astro:assets'
 import { render } from 'astro:content'
 import { SkipLink } from '@carandev/trazos-ui'
 
@@ -22,9 +22,16 @@ interface Props {
 const { post } = Astro.props
 const { title, description, pubDate, updatedDate, tags, cover } = post.data
 const { Content } = await render(post)
+// Social networks need a JPEG/PNG of about 1200 px wide
+const ogImage = cover ? (await getImage({ src: cover, width: 1200, format: 'jpeg' })).src : undefined
 ---
 
-<Layout description={description} title={`${title} | Carlos Gómez`}>
+<Layout
+  article={{ publishedTime: pubDate, modifiedTime: updatedDate, tags }}
+  description={description}
+  image={ogImage}
+  title={`${title} | Carlos Gómez`}
+>
   <SkipLink href='#contenido'>Saltar al contenido</SkipLink>
   <Navbar client:load current='blog' />
   <main class='container article' id='contenido'>

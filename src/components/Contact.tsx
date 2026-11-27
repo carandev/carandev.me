@@ -9,7 +9,7 @@ export function Contact () {
     <section className='container' id='contacto'>
       {/* reveal.ts may mark this element before hydration */}
       <div suppressHydrationWarning className={styles.box} data-reveal=''>
-        <p className={styles.eyebrow}>04 · ¿hablamos?</p>
+        <p className={styles.eyebrow}>05 · ¿hablamos?</p>
         <h2 className={styles.title}>¿Tienes un proyecto o una vacante en mente?</h2>
         <p className={styles.text}>
           Respondo lo más pronto posible. También me encuentras en GitHub y LinkedIn.

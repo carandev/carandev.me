@@ -1,12 +1,13 @@
 import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react'
 import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 import vercel from '@astrojs/vercel'
 
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
   site: 'https://carandev.me',
-  integrations: [react(), mdx()],
+  integrations: [react(), mdx(), sitemap()],
   markdown: {
     // Code blocks follow the site's light/dark theme (see global.css)
     shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } }

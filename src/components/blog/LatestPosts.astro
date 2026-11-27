@@ -1,0 +1,37 @@
+---
+import PostCard from './PostCard.astro'
+import { getPublishedPosts } from '../../lib/blog'
+
+const LATEST_COUNT = 3
+
+const posts = (await getPublishedPosts()).slice(0, LATEST_COUNT)
+---
+
+{posts.length > 0 && (
+  <section class='container section' id='blog'>
+    <div class='heading' data-reveal=''>
+      <p class='eyebrow'>04 · blog</p>
+      <h2 class='section-title'>Últimos artículos</h2>
+    </div>
+
+    <ol class='posts'>
+      {posts.map((post, i) => (
+        <li style={`--delay: ${i * 0.08}s`}>
+          <PostCard headingLevel='h3' post={post} />
+        </li>
+      ))}
+    </ol>
+
+    <a class='all' data-reveal='' href='/blog/'>Ver todos los artículos →</a>
+  </section>
+)}
+
+<style>
+  .section { display: flex; flex-direction: column; gap: 28px; padding-top: 88px; padding-bottom: 32px; }
+  .heading { display: flex; flex-direction: column; gap: 8px; }
+  .posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+  .posts > li { display: flex; }
+  .posts > li > :global(*) { flex: 1; }
+  .all { align-self: flex-start; color: var(--wine); font-weight: 600; text-decoration: none; }
+  .all:hover { text-decoration: underline; }
+</style>
