@@ -40,6 +40,8 @@ npm run dev
 
 Abre `http://localhost:4321/keystatic`. En desarrollo el panel usa el modo **local**: guarda los archivos directamente en tu disco y no pide inicio de sesión. Después haces commit y push como con cualquier otro cambio.
 
+> **Abre el panel con `localhost` o `127.0.0.1`, no con la IP de red.** Si entras por `http://192.168.x.x:4321/keystatic`, el panel no carga ni guarda: muestra *Unable to load collection* y en la consola aparece `Cannot read properties of undefined (reading 'digest')`. Keystatic usa `crypto.subtle`, y el navegador solo lo ofrece en contextos seguros: HTTPS, `localhost` o `127.0.0.1`. La parte pública del sitio sí funciona por la IP de red.
+
 > **Cuidado en redes que no son tuyas:** `npm run dev` usa `--host`, así que otros equipos de tu red pueden abrir el panel y guardar artículos o imágenes sin iniciar sesión. Solo pueden escribir en `src/content/blog/` y `src/assets/blog/`. En una red pública usa `npx astro dev`: sin `--host`, el servidor solo escucha en `127.0.0.1`.
 
 ## Escribir en producción (carandev.me/keystatic)
