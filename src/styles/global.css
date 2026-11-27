@@ -158,3 +158,11 @@ a { color: inherit; }
   .sketch path { stroke-dashoffset: 0; }
   .highlight { background-size: 100% 45%; }
 }
+
+/* ---------- Bloques de código (Shiki, temas claro/oscuro) ---------- */
+
+[data-theme='dark'] .astro-code,
+[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

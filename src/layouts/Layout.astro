@@ -7,22 +7,36 @@ import { THEME_STORAGE_KEY } from '../lib/theme'
 interface Props {
   title?: string
   description?: string
+  /** Absolute or site-relative URL of the social preview image. */
+  image?: string
+  /** Article metadata for Open Graph; omit for regular pages. */
+  article?: {
+    publishedTime: Date
+    modifiedTime?: Date
+    tags?: string[]
+  }
 }
 
 const {
   title = 'Carlos Gómez | Full Stack Developer',
-  description = 'Full Stack Developer | .NET | React | TypeScript | Portafolio'
+  description = 'Full Stack Developer | .NET | React | TypeScript | Portafolio',
+  image = '/og-image.png',
+  article
 } = Astro.props
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
-const ogImage = new URL('/og-image.png', Astro.site)
+const ogImage = new URL(image, Astro.site)
+const rssUrl = new URL('/rss.xml', Astro.site)
 ---
 
 <!doctype html>
 <html lang='es'>
   <head>
     <meta charset='UTF-8' />
-    <link href='https://avatars.githubusercontent.com/u/72842040' rel='icon' type='image/svg+xml' />
+    <!-- Favicons generated from the hero avatar (public/avatar.webp) -->
+    <link href='/favicon-32.png' rel='icon' sizes='32x32' type='image/png' />
+    <link href='/favicon-192.png' rel='icon' sizes='192x192' type='image/png' />
+    <link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' />
     <meta content='width=device-width, initial-scale=1.0' name='viewport' />
 
     <link href='https://fonts.googleapis.com' rel='preconnect' />
@@ -43,13 +57,19 @@ const ogImage = new URL('/og-image.png', Astro.site)
     <link href={canonicalUrl} rel='canonical' />
 
     <!-- Open Graph / Facebook -->
-    <meta content='website' property='og:type' />
+    <meta content={article ? 'article' : 'website'} property='og:type' />
     <meta content={canonicalUrl} property='og:url' />
     <meta content={title} property='og:title' />
     <meta content={description} property='og:description' />
     <meta content={ogImage} property='og:image' />
     <meta content='carandev.me' property='og:site_name' />
     <meta content='es_CO' property='og:locale' />
+    {article && <meta content={article.publishedTime.toISOString()} property='article:published_time' />}
+    {article?.modifiedTime && <meta content={article.modifiedTime.toISOString()} property='article:modified_time' />}
+    {article?.tags?.map(tag => <meta content={tag} property='article:tag' />)}
+
+    <link href={rssUrl} rel='alternate' title='Blog | Carlos Gómez' type='application/rss+xml' />
+    <link href='/sitemap-index.xml' rel='sitemap' />
 
     <!-- Twitter -->
     <meta content='summary_large_image' property='twitter:card' />

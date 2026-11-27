@@ -1,0 +1,58 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import { SkipLink } from '@carandev/trazos-ui'
+
+import Layout from '../../layouts/Layout.astro'
+import { Navbar } from '../../components/Navbar'
+import { Footer } from '../../components/Footer'
+import PostCard from '../../components/blog/PostCard.astro'
+import { getPublishedPosts, POSTS_PER_PAGE, type Post } from '../../lib/blog'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return paginate(await getPublishedPosts(), { pageSize: POSTS_PER_PAGE })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<Post>
+}
+
+const { page } = Astro.props
+const title = page.currentPage === 1 ? 'Blog | Carlos Gómez' : `Blog · página ${page.currentPage} | Carlos Gómez`
+---
+
+<Layout description='Artículos de Carlos Gómez sobre desarrollo full stack, .NET, React y TypeScript.' title={title}>
+  <SkipLink href='#contenido'>Saltar al contenido</SkipLink>
+  <Navbar client:load current='blog' />
+  <main class='container blog' id='contenido'>
+    <header class='heading' data-reveal=''>
+      <p class='eyebrow'>blog</p>
+      <h1 class='section-title'>Lo que voy escribiendo</h1>
+    </header>
+
+    {page.data.length === 0
+      ? <p class='empty'>Todavía no hay artículos publicados.</p>
+      : (
+        <ol class='posts'>
+          {page.data.map(post => <li><PostCard post={post} /></li>)}
+        </ol>
+      )}
+
+    {page.lastPage > 1 && (
+      <nav aria-label='Paginación' class='pagination'>
+        {page.url.prev ? <a href={page.url.prev} rel='prev'>← Más recientes</a> : <span />}
+        <span>Página {page.currentPage} de {page.lastPage}</span>
+        {page.url.next ? <a href={page.url.next} rel='next'>Anteriores →</a> : <span />}
+      </nav>
+    )}
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog { display: flex; flex-direction: column; gap: 28px; padding-top: 120px; padding-bottom: 48px; min-height: 70vh; }
+  .heading { display: flex; flex-direction: column; gap: 8px; }
+  .posts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+  .empty { color: var(--ink-light); }
+  .pagination { display: flex; justify-content: space-between; align-items: center; gap: 16px; max-width: 760px; color: var(--ink-light); }
+  .pagination a { color: var(--wine); font-weight: 600; }
+</style>
