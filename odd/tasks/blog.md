@@ -19,9 +19,9 @@ Branch: `20261127-blog` · Delivery: work-unit commits, push/PR by the user · T
 | ID | Specs | Route | Status | Commit |
 |----|-------|-------|--------|--------|
 | T1 | S4, S5, S6 (list + article), S7 | inline | done | 17ced54 |
-| T2 | S6 (home, navbar, RSS, sitemap, SEO) | inline | done | see L5 |
-| T3 | S2, S3, S8 | inline | pending | |
-| T4 | S2, S8 | independent verifier (Risk items 2, 5) | pending | |
+| T2 | S6 (home, navbar, RSS, sitemap, SEO) | inline | done | a898566 |
+| T3 | S2, S3, S8 | inline | done | see L6 |
+| T4 | S2, S8 | independent verifier (Risk items 2, 5) | in progress | |
 
 ## Log
 
@@ -30,3 +30,4 @@ Branch: `20261127-blog` · Delivery: work-unit commits, push/PR by the user · T
 - L3: Versions checked on npm: `@keystatic/astro` 6.0.0 (peer `astro` 5 || 6 || 7), `@keystatic/core` 0.6.10, `@astrojs/mdx` 8.1.6 (peer astro ^7.2.10), `@astrojs/rss` 4.0.19, `@astrojs/sitemap` 3.7.6. Engram mirror unavailable in this session (no memory tools).
 - L4: T1 done (17ced54). `astro check` 0 errors; `astro build` Complete. Smoke with temporary content (2 posts + 1 draft, page size 1): /blog lists newest first, /blog/2/ shows the older one with prev link and "Página 2 de 2", the draft appears in no generated file; dev server: /, /blog/, /blog/hola-mundo/ → 200, /blog/2/ and unknown slug → 404 (no route clash between `[slug]` and `[...page]`). Screenshots desktop + mobile reviewed. Navbar links point to `/#section` outside the home.
 - L5: T2 done. Home shows "04 · blog · Últimos artículos" (3 latest) before Contact (renumbered 05). `rss.xml` (language es, items newest first), `sitemap-index.xml` (home, /blog/, articles), RSS alternate link in head, `og:type=article` + `article:*` meta and a 1200 px JPEG `og:image` from the cover when present (checked with a temporary post with cover). Pre-existing, not changed: `/og-image.png` is referenced but `public/` only has `og-image.svg`.
+- L6: T3 done. Keystatic (`keystatic.config.ts`, `@keystatic/astro` integration) injects `/keystatic/[...params]` and `/api/keystatic/[...params]` (on demand). Keystatic's local-mode API has no environment guard, so storage is `local` only when `import.meta.env.DEV` (and `PUBLIC_KEYSTATIC_STORAGE !== 'github'`, an opt-in to run the GitHub App setup wizard locally); every other build is `github` (repo carandev/carandev.me) — confirmed in the production server chunk. Secrets declared in `env.schema` (server/secret, optional). Content schema now maps `null` optional fields (as Keystatic may write) to undefined. Dev: /keystatic and /keystatic/collection/blog → 200; the existing article opens in the editor with every field populated (screenshots). `astro check` 0 errors; `astro build` Complete. Docs: `docs/blog.md`. Not done here: `.env.example` (blocked for the agent by the safety policy) — the user should add the 4 KEYSTATIC vars there. Risk: items 2 (admin auth, secrets, unauthenticated local write API) and 5 (new dependencies) → T4 independent verifier.
